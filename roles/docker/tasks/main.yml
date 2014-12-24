@@ -9,10 +9,9 @@
 
 - name: Add tim to docker group
   sudo: True
-  when: not docker.stat.exists
   user: name=tim groups=docker append=yes
 
-- name: Add tim to docker group
+- name: Restart docker daemon
   sudo: True
   when: not docker.stat.exists
   service: name=docker state=restarted

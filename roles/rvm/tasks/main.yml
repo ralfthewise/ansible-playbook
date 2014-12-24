@@ -1,0 +1,22 @@
+---
+- stat: path=/usr/local/rvm/bin/rvm
+  register: rvm
+
+- name: Install rvm
+  sudo: True
+  when: not rvm.stat.exists
+  shell: curl -sSL https://get.rvm.io | sudo bash -s stable
+
+- name: Add tim to docker group
+  sudo: True
+  user: name=tim groups=rvm append=yes
+
+- name: Install rvm requirements
+  sudo: True
+  when: not rvm.stat.exists
+  shell: bash -l -c 'rvm requirements'
+
+- name: Install ruby 2.1
+  sudo: True
+  when: not rvm.stat.exists
+  shell: bash -l -c 'rvm install 2.1'
