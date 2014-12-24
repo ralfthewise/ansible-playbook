@@ -1,0 +1,9 @@
+---
+- name: Create dev dir
+  file: path=~/dev state=directory
+
+- name: Checkout vimconfig
+  git: repo=git@github.com:ralfthewise/vimconfig.git dest=~/dev/vimconfig force=no update=no
+
+- name: Init vimconfig
+  shell: ~/dev/vimconfig/init.sh

@@ -1,0 +1,19 @@
+- hosts: all
+  gather_facts: True
+  tasks:
+    - group_by: key={{ansible_os_family}}
+
+- name: Default provisioning task
+  hosts: all
+  gather_facts: False
+
+  roles:
+    - install_packages
+    - vim
+
+- name: Ping hosts
+  hosts: ping
+  gather_facts: False
+
+  roles:
+    - ping
