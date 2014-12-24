@@ -3,10 +3,12 @@
   sudo: True
   apt: name={{item}} state=latest
   with_items:
+    - build-essential
     - unzip
     - wget
     - curl
     - git
+    - mercurial
     - software-properties-common
     - openssh-client
     - exuberant-ctags

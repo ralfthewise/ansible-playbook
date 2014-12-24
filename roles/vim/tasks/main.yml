@@ -1,4 +1,8 @@
 ---
+- name: Install build dependencies
+  sudo: True
+  shell: apt-get build-dep vim-gtk
+
 - name: Create dev dir
   file: path=~/dev state=directory
 
