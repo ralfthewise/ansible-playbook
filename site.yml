@@ -11,6 +11,7 @@
     - install_packages
     - java
     - vim
+    - docker
 
 - name: Ping hosts
   hosts: ping

@@ -11,6 +11,7 @@
     - openssh-client
     - exuberant-ctags
     - cscope
+    - apt-transport-https
 
 - stat: path=/usr/bin/node
   register: nodejs

@@ -9,6 +9,7 @@
 
 - name: Apt update
   sudo: True
+  when: not java.stat.exists
   apt: update_cache=yes
 
 - name: Accept java 7 license
