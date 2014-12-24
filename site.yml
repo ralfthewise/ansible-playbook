@@ -9,6 +9,7 @@
 
   roles:
     - install_packages
+    - java
     - vim
 
 - name: Ping hosts

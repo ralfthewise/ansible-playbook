@@ -1,0 +1,28 @@
+---
+- stat: path=/usr/bin/java
+  register: java
+
+- name: Add java repo
+  sudo: True
+  when: not java.stat.exists
+  apt_repository: repo='ppa:webupd8team/java'
+
+- name: Apt update
+  sudo: True
+  apt: update_cache=yes
+
+- name: Accept java 7 license
+  sudo: True
+  shell: echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+
+- name: Install java 7
+  sudo: True
+  apt: name=oracle-java7-installer state=latest
+
+#- name: Accept java 8 license
+#  sudo: True
+#  shell: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+
+#- name: Install java 8
+#  sudo: True
+#  apt: name=oracle-java8-installer state=latest
