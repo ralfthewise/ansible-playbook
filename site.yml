@@ -9,6 +9,7 @@
 
   roles:
     - install_packages
+    - git
     - java
     - vim
     - rvm

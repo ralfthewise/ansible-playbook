@@ -1,0 +1,11 @@
+---
+- name: Install git
+  sudo: True
+  apt: name=git state=latest
+
+- stat: path=~/.gitconfig
+  register: gitconfig
+
+- name: Configure git
+  when: not gitconfig.stat.exists
+  shell: git config --global user.email "garton.tim@gmail.com" && git config --global user.name "Tim Garton" && git config --global push.default simple
