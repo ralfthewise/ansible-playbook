@@ -2,12 +2,17 @@
 - stat: path=/usr/local/rvm/bin/rvm
   register: rvm
 
+- name: Add rvm GPG key
+  sudo: True
+  when: not rvm.stat.exists
+  shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+
 - name: Install rvm
   sudo: True
   when: not rvm.stat.exists
   shell: curl -sSL https://get.rvm.io | sudo bash -s stable
 
-- name: Add tim to docker group
+- name: Add tim to rvm group
   sudo: True
   user: name=tim groups=rvm append=yes
 
@@ -16,7 +21,7 @@
   when: not rvm.stat.exists
   shell: bash -l -c 'rvm requirements'
 
-- name: Install ruby 2.1
+- name: Install ruby 2.2
   sudo: True
   when: not rvm.stat.exists
-  shell: bash -l -c 'rvm install 2.1'
+  shell: bash -l -c 'rvm install 2.2'

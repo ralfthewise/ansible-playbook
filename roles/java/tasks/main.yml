@@ -14,6 +14,7 @@
 
 - name: Accept java 7 license
   sudo: True
+  when: not java.stat.exists
   shell: echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
 - name: Install java 7
@@ -22,6 +23,7 @@
 
 #- name: Accept java 8 license
 #  sudo: True
+#  when: not java.stat.exists
 #  shell: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
 #- name: Install java 8
