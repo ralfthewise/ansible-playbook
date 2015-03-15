@@ -25,3 +25,11 @@
   sudo: True
   when: not rvm.stat.exists
   shell: bash -l -c 'rvm install 2.2'
+
+- name: Install ruby ldconfig conf
+  sudo: True
+  copy: src=roles/rvm/files/ruby.conf dest=/etc/ld.so.conf.d/ruby.conf group=root owner=root mode=0644
+
+- name: Run ldconfig for new ruby.conf
+  sudo: True
+  shell: ldconfig

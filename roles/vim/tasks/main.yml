@@ -1,10 +1,35 @@
 ---
+- stat: path=/usr/local/vim/bin/vim
+  register: vim
+
 - name: Install build dependencies
   sudo: True
   shell: apt-get -y build-dep vim-gtk
 
 - name: Create dev dir
   file: path=~/dev state=directory
+
+- name: Checkout vim source
+  when: not vim.stat.exists
+  hg: repo=https://vim.googlecode.com/hg/ dest=~/dev/vim
+
+- name: Configure vim source
+  when: not vim.stat.exists
+  shell: ./configure --prefix=/usr/local/vim --enable-pythoninterp=yes --enable-multibyte=yes --enable-cscope=yes --enable-rubyinterp=yes chdir=~/dev/vim
+
+- name: Compile vim source
+  when: not vim.stat.exists
+  shell: make chdir=~/dev/vim
+
+- name: Install vim
+  sudo: True
+  when: not vim.stat.exists
+  shell: make install chdir=/home/tim/dev/vim
+
+- name: Install vim symbolic links
+  sudo: True
+  when: not vim.stat.exists
+  shell: ln -s /usr/local/vim/bin/* /usr/local/bin
 
 - name: Checkout vimconfig
   git: repo=git@github.com:ralfthewise/vimconfig.git dest=~/dev/vimconfig force=no update=no
