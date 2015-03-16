@@ -13,6 +13,7 @@
     - exuberant-ctags
     - cscope
     - apt-transport-https
+    - rdesktop
     - keepass2
 
 - stat: path=/usr/bin/node
