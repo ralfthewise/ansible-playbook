@@ -1,0 +1,22 @@
+---
+- shell: if [[ ! -f "/usr/local/go/bin/go" || $(/usr/local/go/bin/go version | cut -b 14- | cut -f 1 -d ' ') != "{{golang_version}}" ]]; then echo required; fi executable=/bin/bash
+  register: golang
+
+- name: Download go
+  when: golang.stdout == "required"
+  shell: wget -nv "http://golang.org/dl/{{golang_tarball}}" -O "/tmp/{{golang_tarball}}"
+
+- name: Delete old go
+  sudo: True
+  when: golang.stdout == "required"
+  shell: rm -rf /usr/local/go
+
+- name: Install go
+  sudo: True
+  when: golang.stdout == "required"
+  shell: tar -C /usr/local -zxf "/tmp/{{golang_tarball}}"
+
+- name: Set GOROOT
+  lineinfile:
+    dest: ~/.bashrc
+    line: 'export GOROOT=/usr/local/go'

@@ -11,6 +11,7 @@
     - install_packages
     - git
     - java
+    - golang
     - rvm
     - vim
     - docker

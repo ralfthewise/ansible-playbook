@@ -13,6 +13,7 @@
     - exuberant-ctags
     - cscope
     - apt-transport-https
+    - keepass2
 
 - stat: path=/usr/bin/node
   register: nodejs
