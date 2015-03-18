@@ -13,6 +13,9 @@
     - exuberant-ctags
     - cscope
     - apt-transport-https
+    - postgresql
+    - libpq-dev
+    - redis-server
     - rdesktop
     - keepass2
 
