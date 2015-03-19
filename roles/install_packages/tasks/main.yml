@@ -10,6 +10,7 @@
     - mercurial
     - software-properties-common
     - openssh-client
+    - openssh-server
     - exuberant-ctags
     - cscope
     - apt-transport-https
