@@ -19,6 +19,8 @@
     - redis-server
     - rdesktop
     - keepass2
+    - xdotool
+    - clipit
 
 - stat: path=/usr/bin/node
   register: nodejs
