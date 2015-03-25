@@ -1,0 +1,32 @@
+---
+- stat: path=/usr/bin/node
+  register: nodejs
+
+- name: remove ppa/chris-lea repository
+  sudo: True
+  apt_repository: repo="ppa:chris-lea/node.js" state=absent update_cache=yes
+
+- name: Add node repo
+  sudo: True
+  when: not nodejs.stat.exists
+  shell: curl -sL 'https://deb.nodesource.com/setup_{{nodejs_version}}' | sudo bash -
+
+- name: Install nodejs
+  sudo: True
+  apt: name=nodejs state=latest update_cache=yes cache_valid_time=86400
+
+- stat: path=/usr/bin/coffee
+  register: coffeescript
+
+- name: Install coffeescript
+  sudo: True
+  when: not coffeescript.stat.exists
+  shell: npm install -g coffee-script
+
+- stat: path=/usr/bin/coffeelint
+  register: coffeelint
+
+- name: Install coffeelint
+  sudo: True
+  when: not coffeelint.stat.exists
+  shell: npm install -g coffeelint
