@@ -1,0 +1,22 @@
+---
+- name: Set HISTSIZE
+  lineinfile:
+    dest: ~/.bashrc
+    regexp: 'HISTSIZE=.*$'
+    line: 'HISTSIZE=-1'
+
+- name: Set HISTFILESIZE
+  lineinfile:
+    dest: ~/.bashrc
+    regexp: 'HISTFILESIZE=.*$'
+    line: 'HISTFILESIZE=-1'
+
+- name: Set HISTTIMEFORMAT
+  lineinfile:
+    dest: ~/.bashrc
+    regexp: 'HISTTIMEFORMAT=.*$'
+    line: 'HISTTIMEFORMAT="%F %T "'
+
+# Not sure this is actually necessary
+- name: Export HISTFILESIZE HISTSIZE HISTTIMEFORMAT
+  lineinfile: dest=~/.bashrc line='export HISTFILESIZE HISTSIZE HISTTIMEFORMAT'

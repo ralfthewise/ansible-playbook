@@ -1,0 +1,22 @@
+---
+- stat: path=/usr/bin/google-chrome
+  register: chrome
+
+- name: Add google signing key
+  sudo: True
+  when: not chrome.stat.exists
+  shell: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+- name: Add chrome repo
+  sudo: True
+  when: not chrome.stat.exists
+  shell: echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+
+- name: Apt update
+  sudo: True
+  when: not chrome.stat.exists
+  apt: update_cache=yes
+
+- name: Install chrome
+  sudo: True
+  apt: name=google-chrome-stable state=latest
