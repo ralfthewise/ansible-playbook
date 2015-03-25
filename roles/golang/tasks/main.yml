@@ -19,5 +19,11 @@
 - name: Set GOROOT
   lineinfile: dest=~/.bashrc line='export GOROOT=/usr/local/go'
 
+- name: Set GOPATH
+  lineinfile:
+    dest: ~/.bashrc
+    regexp: 'export GOPATH=.*'
+    line: 'export GOPATH=~/dev/go'
+
 - name: Add go to PATH
-  lineinfile: dest=~/.bashrc line='export PATH=$PATH:/usr/local/go/bin'
+  lineinfile: dest=~/.bashrc line='export PATH=$PATH:/usr/local/go/bin:${GOPATH//://bin:}/bin'
