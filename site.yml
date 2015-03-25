@@ -16,6 +16,7 @@
     - vim
     - docker
     - google_chrome
+    - hipchat
     - user_config
 
 - name: Ping hosts

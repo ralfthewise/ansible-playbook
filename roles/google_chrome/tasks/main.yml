@@ -10,7 +10,7 @@
 - name: Add chrome repo
   sudo: True
   when: not chrome.stat.exists
-  shell: echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+  shell: echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 
 - name: Apt update
   sudo: True
