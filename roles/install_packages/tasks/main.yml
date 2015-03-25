@@ -17,6 +17,7 @@
     - postgresql
     - libpq-dev
     - redis-server
+    - compton
     - tofrodos
     - rdesktop
     - keepass2
