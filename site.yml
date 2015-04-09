@@ -18,6 +18,7 @@
     - docker
     - google_chrome
     - hipchat
+    - virtualbox
     - user_config
 
 - name: Ping hosts
