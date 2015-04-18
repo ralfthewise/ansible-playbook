@@ -20,6 +20,7 @@
     - hipchat
     - virtualbox
     - user_config
+    - lilyterm
 
 - name: Ping hosts
   hosts: ping
