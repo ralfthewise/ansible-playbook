@@ -18,9 +18,9 @@
     - docker
     - google_chrome
     - hipchat
-    - virtualbox
     - user_config
     - lilyterm
+    - virtualbox
 
 - name: Ping hosts
   hosts: ping

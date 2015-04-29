@@ -1,5 +1,5 @@
 ---
-- stat: path=/usr/bin/java
+- stat: path=/usr/lib/jvm/java-7-oracle/jre/bin/java
   register: java
 
 - name: Add java repo
