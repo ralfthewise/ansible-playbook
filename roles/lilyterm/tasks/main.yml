@@ -3,5 +3,8 @@
   sudo: True
   apt: name=lilyterm state=latest
 
+- name: Create lilyterm config directory
+  file: path=~/.config/lilyterm state=directory mode=0700
+
 - name: Install lilyterm config
   copy: src=roles/lilyterm/files/default.conf dest=~/.config/lilyterm/default.conf mode=0664
