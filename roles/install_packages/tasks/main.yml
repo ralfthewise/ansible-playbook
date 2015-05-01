@@ -23,6 +23,7 @@
     - compton
     - rdesktop
     - xtightvncviewer
+    - ssvnc
     - keepass2
     - xdotool
     - clipit
