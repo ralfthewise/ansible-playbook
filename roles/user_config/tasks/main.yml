@@ -21,7 +21,7 @@
   lineinfile:
     dest: ~/.bashrc
     regexp: ^alias goenv=.*
-    line: alias goenv='env GOPATH=$(cd ../../../.. && pwd):$(pwd)/Godeps/_workspace
+    line: alias goenv='env GOPATH=$(cd ../../../.. && pwd):$(pwd)/Godeps/_workspace'
 
 # Not sure this is actually necessary
 - name: Export HISTFILESIZE HISTSIZE HISTTIMEFORMAT
