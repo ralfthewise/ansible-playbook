@@ -7,6 +7,7 @@
     - unzip
     - wget
     - curl
+    - screen
     - traceroute
     - mercurial
     - software-properties-common
@@ -21,6 +22,7 @@
     - autofs
     - tofrodos
     - compton
+    - x11vnc
     - rdesktop
     - xtightvncviewer
     - ssvnc
