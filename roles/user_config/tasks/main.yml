@@ -17,11 +17,11 @@
     regexp: 'HISTTIMEFORMAT=.*$'
     line: 'HISTTIMEFORMAT="%F %T "'
 
-- name: Create vimgo alias
+- name: Create goenv alias
   lineinfile:
     dest: ~/.bashrc
-    regexp: ^alias vimgo=.*
-    line: alias vimgo='GOPATH=$(pwd)/Godeps/_workspace:$(cd ../../../.. && pwd) vim'
+    regexp: ^alias goenv=.*
+    line: alias goenv='env GOPATH=$(cd ../../../.. && pwd):$(pwd)/Godeps/_workspace
 
 # Not sure this is actually necessary
 - name: Export HISTFILESIZE HISTSIZE HISTTIMEFORMAT
