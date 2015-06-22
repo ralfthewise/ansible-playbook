@@ -21,6 +21,7 @@
     - redis-server
     - autofs
     - tofrodos
+    - python-pip
     - compton
     - x11vnc
     - rdesktop
