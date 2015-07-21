@@ -16,8 +16,6 @@
     - exuberant-ctags
     - cscope
     - apt-transport-https
-    - postgresql
-    - libpq-dev
     - redis-server
     - autofs
     - tofrodos
