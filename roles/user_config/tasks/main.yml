@@ -17,6 +17,12 @@
     regexp: 'HISTTIMEFORMAT=.*$'
     line: 'HISTTIMEFORMAT="%F %T "'
 
+- name: Set PROMPT_COMMAND
+  lineinfile:
+    dest: ~/.bashrc
+    regexp: 'export PROMPT_COMMAND=.*$'
+    line: 'export PROMPT_COMMAND="history -a" #flush history after every command'
+
 - name: Create goenv alias
   lineinfile:
     dest: ~/.bashrc
