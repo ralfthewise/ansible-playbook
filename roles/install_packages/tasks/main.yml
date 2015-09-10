@@ -28,7 +28,6 @@
     - ssvnc
     - keepass2
     - xdotool
-    - clipit
     - gimp
     - mplayer2
     - silversearcher-ag
@@ -37,3 +36,5 @@
     - asunder
     - picard
     #also need https://git.lekensteyn.nl/ltunify/
+    #also included at some point but no longer use
+    #- clipit
