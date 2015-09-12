@@ -21,6 +21,7 @@
     - hipchat
     - user_config
     - lilyterm
+    - gnome_terminal
     - virtualbox
 
 - name: Ping hosts

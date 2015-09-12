@@ -1,0 +1,7 @@
+---
+- name: Lookup gnome terminal default profile
+  shell: dconf read /org/gnome/terminal/legacy/profiles:/default
+  register: profile
+
+- name: Set infinite scrollback
+  shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/scrollback-unlimited true
