@@ -1,7 +1,23 @@
 ---
+# Also could try things like this here:
+#   gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 6
+#   gsettings get org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize
+#   gsettings list-keys org.compiz.wall:/
+#   gsettings get org.gnome.Terminal.ProfilesList default
+
 - name: Lookup gnome terminal default profile
   shell: dconf read /org/gnome/terminal/legacy/profiles:/default
   register: profile
 
-- name: Set infinite scrollback
-  shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/scrollback-unlimited true
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/terminal '"<Super>t"'
+- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/scrollback-unlimited true
+- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/login-shell true
+
+- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '"<Super>space"'
+- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/panel-first-menu '"Disabled"'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-right '"<Super>Right"'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-left '"<Super>Left"'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/toggle-maximized '["<Alt>F10"]'
+- shell: dconf write /org/compiz/profiles/unity/plugins/core/hsize 4
+- shell: dconf write /org/compiz/profiles/unity/plugins/core/vsize 1
+- shell: dconf write /org/compiz/profiles/unity/plugins/wall/allow-wraparound true
