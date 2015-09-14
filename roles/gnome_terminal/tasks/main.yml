@@ -10,14 +10,28 @@
   register: profile
 
 - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/terminal '"<Super>t"'
+
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/scrollback-unlimited true
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/login-shell true
 
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '"<Super>space"'
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/panel-first-menu '"Disabled"'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-right '"<Super>Right"'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-left '"<Super>Left"'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/toggle-maximized '["<Alt>F10"]'
 - shell: dconf write /org/compiz/profiles/unity/plugins/core/hsize 4
 - shell: dconf write /org/compiz/profiles/unity/plugins/core/vsize 1
 - shell: dconf write /org/compiz/profiles/unity/plugins/wall/allow-wraparound true
+- shell: dconf reset /org/compiz/profiles/unity/plugins/scale/initiate-key
+#- shell: dconf write /org/compiz/profiles/unity/plugins/scale/initiate-key '"<Super>w"'
+- shell: dconf reset /org/compiz/profiles/unity/plugins/expo/expo-key
+#- shell: dconf write /org/compiz/profiles/unity/plugins/expo/expo-key '"<Super>s"'
+
+- shell: dconf write /org/gnome/desktop/wm/keybindings/toggle-maximized '["<Alt>F10"]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-right '["<Super>Right"]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-left '["<Super>Left"]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-up '["<Super>Up"]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-down '["<Super>Down"]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-left '["<Shift><Super>Left"]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-right '["<Shift><Super>Right"]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-up '["<Shift><Super>Up"]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-down '["<Shift><Super>Down"]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-1 '[""]'
+- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-1 '[""]'
