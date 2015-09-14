@@ -16,6 +16,9 @@
 
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '"<Super>space"'
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/panel-first-menu '"Disabled"'
+- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/reveal-trigger 0
+- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/reveal-pressure 1
+- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1
 - shell: dconf write /org/compiz/profiles/unity/plugins/core/hsize 4
 - shell: dconf write /org/compiz/profiles/unity/plugins/core/vsize 1
 - shell: dconf write /org/compiz/profiles/unity/plugins/wall/allow-wraparound true
