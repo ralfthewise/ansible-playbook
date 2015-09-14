@@ -23,6 +23,7 @@
     - lilyterm
     - gnome_terminal
     - virtualbox
+    #- autofs_client
 
 - name: Ping hosts
   hosts: ping
