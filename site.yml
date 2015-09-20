@@ -21,7 +21,7 @@
     - hipchat
     - user_config
     - lilyterm
-    - gnome_terminal
+    - ubuntu_config
     - virtualbox
     #- autofs_client
 
