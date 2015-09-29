@@ -23,6 +23,7 @@
     - lilyterm
     - ubuntu_config
     - virtualbox
+    - updf
     #- autofs_client
 
 - name: Ping hosts

@@ -1,0 +1,39 @@
+---
+- stat: path=/usr/bin/updf
+  register: updf
+
+- name: Add updf repo
+  sudo: True
+  when: not updf.stat.exists
+  apt_repository: repo='ppa:atareao/updf'
+
+- name: Set repo version
+  sudo: True
+  when: not updf.stat.exists
+  lineinfile:
+    dest: /etc/apt/sources.list.d/atareao-ubuntu-updf-vivid.list
+    regexp: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu vivid main'
+    line: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu quantal main'
+
+- name: Apt update
+  sudo: True
+  when: not updf.stat.exists
+  apt: update_cache=yes
+
+- name: Install updf
+  sudo: True
+  apt: name=updf state=latest
+
+- name: Fix updf toolbar 1
+  sudo: True
+  lineinfile:
+    dest: /usr/share/updf/updf.py
+    regexp: "toolbar.set_property\\(\"toolbar_style\",'icons'\\)"
+    line: "#toolbar.set_property(\"toolbar_style\",'icons')"
+
+- name: Fix updf toolbar 2
+  sudo: True
+  lineinfile:
+    dest: /usr/share/updf/updf.py
+    regexp: "toolbar2.set_property\\(\"toolbar_style\",'icons'\\)"
+    line: "#toolbar2.set_property(\"toolbar_style\",'icons')"
