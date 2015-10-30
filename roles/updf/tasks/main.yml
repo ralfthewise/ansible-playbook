@@ -6,12 +6,13 @@
   sudo: True
   when: not updf.stat.exists
   apt_repository: repo='ppa:atareao/updf'
+  ignore_errors: yes
 
 - name: Set repo version
   sudo: True
   when: not updf.stat.exists
   lineinfile:
-    dest: /etc/apt/sources.list.d/atareao-ubuntu-updf-vivid.list
+    dest: /etc/apt/sources.list.d/ppa_atareao_updf_vivid.list
     regexp: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu vivid main'
     line: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu quantal main'
 
