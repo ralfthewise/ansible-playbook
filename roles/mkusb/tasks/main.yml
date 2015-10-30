@@ -1,0 +1,8 @@
+---
+- name: Add mkusb repo
+  sudo: True
+  apt_repository: repo='ppa:mkusb/ppa' state=present update_cache=yes
+
+- name: Install mkusb
+  sudo: True
+  apt: name=mkusb state=latest

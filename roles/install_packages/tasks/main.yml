@@ -32,7 +32,6 @@
     - mplayer2
     - silversearcher-ag #faster grep
     - libreoffice
-    - usb-creator-gtk
     - asunder #music CD ripper
     - picard #rename/tag mp3 files based on online signatures
     #also need https://git.lekensteyn.nl/ltunify/
