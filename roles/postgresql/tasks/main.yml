@@ -9,7 +9,7 @@
 
 - name: Install postgresql
   sudo: True
-  apt: name={{item}} state=latest update_cache=yes cache_valid_time=600 default_release=vivid
+  apt: name={{item}} state=latest update_cache=yes cache_valid_time=600 default_release={{ ansible_distribution_release }}
   with_items:
     - postgresql
     - libpq-dev

@@ -20,4 +20,4 @@
 - name: install virtualbox
   sudo: True
   when: not vbox.stat.exists
-  apt: name=virtualbox-4.3 state=latest update_cache=yes cache_valid_time=600
+  apt: name=virtualbox state=latest update_cache=yes cache_valid_time=600

@@ -12,8 +12,8 @@
   sudo: True
   when: not updf.stat.exists
   lineinfile:
-    dest: /etc/apt/sources.list.d/ppa_atareao_updf_vivid.list
-    regexp: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu vivid main'
+    dest: /etc/apt/sources.list.d/ppa_atareao_updf_{{ ansible_distribution_release }}.list
+    regexp: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu {{ ansible_distribution_release }} main'
     line: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu quantal main'
 
 - name: Apt update

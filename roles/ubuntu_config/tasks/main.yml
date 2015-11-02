@@ -6,13 +6,15 @@
 #   gsettings get org.gnome.Terminal.ProfilesList default
 
 - name: Lookup gnome terminal default profile
-  shell: dconf read /org/gnome/terminal/legacy/profiles:/default
+  shell: gsettings get org.gnome.Terminal.ProfilesList default
+  #shell: dconf read /org/gnome/terminal/legacy/profiles:/default
   register: profile
 
 - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/terminal '"<Super>t"'
 
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/scrollback-unlimited true
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/login-shell true
+- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/visible-name '"Default"'
 
 - shell: dconf write /desktop/unity/lenses/applications/display-available-apps false #don't show online results in dash
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '"<Super>space"'
@@ -39,3 +41,5 @@
 - shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-down '["<Shift><Super>Down"]'
 - shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-1 '[""]'
 - shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-1 '[""]'
+
+- shell: dconf write /com/canonical/unity/lenses/remote-content-search '"none"'
