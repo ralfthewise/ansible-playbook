@@ -11,7 +11,7 @@
   register: profile
 
 - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/terminal '"<Super>t"'
-
+- shell: dconf write /org/gnome/terminal/legacy/keybindings/help '"disabled"'
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/scrollback-unlimited true
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/login-shell true
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/visible-name '"Default"'
