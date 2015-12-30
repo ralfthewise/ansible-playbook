@@ -44,3 +44,6 @@
 - shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-1 '[""]'
 
 - shell: dconf write /com/canonical/unity/lenses/remote-content-search '"none"'
+
+- shell: dconf write /org/gtk/settings/file-chooser/show-hidden true
+- shell: dconf write /org/gnome/nautilus/preferences/default-folder-viewer '"list-view"'
