@@ -9,3 +9,6 @@
 - name: Configure git
   when: not gitconfig.stat.exists
   shell: git config --global user.email "garton.tim@gmail.com" && git config --global user.name "Tim Garton" && git config --global push.default simple
+
+- name: Use git instead of https
+  shell: git config --global url.git@github.com:.insteadOf https://github.com/
