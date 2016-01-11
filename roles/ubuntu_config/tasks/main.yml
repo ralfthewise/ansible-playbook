@@ -17,6 +17,9 @@
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/visible-name '"Default"'
 
 - shell: dconf write /desktop/unity/lenses/applications/display-available-apps false #don't show online results in dash
+- shell: dconf write /desktop/unity/lenses/files/use-locate false #don't show file results
+- shell: dconf write /com/canonical/unity/lenses/remote-content-search '"none"'
+
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '"<Super>space"'
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/execute-command '"<Super>r"'
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/panel-first-menu '"Disabled"' #don't show application first menu on Alt-F10
@@ -42,8 +45,6 @@
 - shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-down '["<Shift><Super>Down"]'
 - shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-1 '[""]'
 - shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-1 '[""]'
-
-- shell: dconf write /com/canonical/unity/lenses/remote-content-search '"none"'
 
 - shell: dconf write /org/gtk/settings/file-chooser/show-hidden true
 - shell: dconf write /org/gnome/nautilus/preferences/default-folder-viewer '"list-view"'
