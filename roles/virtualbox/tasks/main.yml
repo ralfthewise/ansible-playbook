@@ -21,3 +21,18 @@
   sudo: True
   when: not vbox.stat.exists
   apt: name=virtualbox state=latest update_cache=yes cache_valid_time=600
+
+- name: Add keyfile section to NetworkManager.conf
+  sudo: True
+  lineinfile:
+    dest: /etc/NetworkManager/NetworkManager.conf
+    regexp: '\[keyfile\]'
+    line: '[keyfile]'
+
+- name: Add unmanaged vboxnet0 to NetworkManager.conf
+  sudo: True
+  lineinfile:
+    dest: /etc/NetworkManager/NetworkManager.conf
+    insertafter: '\[keyfile\]'
+    regexp: 'unmanaged-devices='
+    line: 'unmanaged-devices=interface-name:vboxnet0'

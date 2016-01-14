@@ -12,6 +12,6 @@ ANSIBLE_GROUPS="localhost,vim"
 export ANSIBLE_HOST ANSIBLE_GROUPS
 
 #fucking do this shit, bitch!!
-ansible-playbook site.yml -vv -i dynamic.py --ask-sudo-pass "$@"
+ansible-playbook site.yml -vv -i dynamic.py --ask-become-pass "$@"
 
 popd &> /dev/null
