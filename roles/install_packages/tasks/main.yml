@@ -34,6 +34,7 @@
     - traceroute
     - whois
     - unzip
+    - p7zip-full
     - wget
     - x11vnc
     - xdotool
