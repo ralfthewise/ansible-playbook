@@ -1,19 +1,19 @@
 ---
 - name: Postgresql apt repository key
-  sudo: True
+  become: True
   apt_key: url='https://www.postgresql.org/media/keys/ACCC4CF8.asc'
 
 - name: Postgresql apt repository
-  sudo: True
+  become: True
   apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ utopic-pgdg main' state=present update_cache=yes
 
 - name: Install postgresql
-  sudo: True
+  become: True
   apt: name={{item}} state=latest update_cache=yes cache_valid_time=600 default_release={{ ansible_distribution_release }}
   with_items:
     - postgresql
     - libpq-dev
 
 - name: Install check-postgres
-  sudo: True
+  become: True
   apt: name=check-postgres state=latest update_cache=yes cache_valid_time=600 default_release=utopic-pgdg

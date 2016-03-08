@@ -3,20 +3,20 @@
   register: hipchat
 
 - name: Add hipchat signing key
-  sudo: True
+  become: True
   when: not hipchat.stat.exists
   shell: wget -O - https://www.hipchat.com/keys/hipchat-linux.key | sudo apt-key add -
 
 - name: Add hipchat repo
-  sudo: True
+  become: True
   when: not hipchat.stat.exists
   shell: echo "deb http://downloads.hipchat.com/linux/apt stable main" > /etc/apt/sources.list.d/atlassian-hipchat.list
 
 - name: Apt update
-  sudo: True
+  become: True
   when: not hipchat.stat.exists
   apt: update_cache=yes
 
 - name: Install hipchat
-  sudo: True
+  become: True
   apt: name=hipchat state=latest

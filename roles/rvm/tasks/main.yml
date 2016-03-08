@@ -3,33 +3,33 @@
   register: rvm
 
 - name: Add rvm GPG key
-  sudo: True
+  become: True
   when: not rvm.stat.exists
   shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 
 - name: Install rvm
-  sudo: True
+  become: True
   when: not rvm.stat.exists
   shell: curl -sSL https://get.rvm.io | sudo bash -s stable
 
 - name: Add tim to rvm group
-  sudo: True
+  become: True
   user: name=tim groups=rvm append=yes
 
 - name: Install rvm requirements
-  sudo: True
+  become: True
   when: not rvm.stat.exists
   shell: bash -l -c 'rvm requirements'
 
 - name: Install ruby 2.2
-  sudo: True
+  become: True
   when: not rvm.stat.exists
   shell: bash -l -c 'rvm install 2.2'
 
 - name: Install ruby ldconfig conf
-  sudo: True
+  become: True
   copy: src=roles/rvm/files/ruby.conf dest=/etc/ld.so.conf.d/ruby.conf group=root owner=root mode=0644
 
 - name: Run ldconfig for new ruby.conf
-  sudo: True
+  become: True
   shell: ldconfig

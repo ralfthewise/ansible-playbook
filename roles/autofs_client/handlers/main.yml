@@ -1,4 +1,4 @@
 ---
 - name: Restart autofs
-  sudo: True
+  become: True
   service: name=autofs state=restarted

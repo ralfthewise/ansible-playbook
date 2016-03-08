@@ -1,6 +1,6 @@
 ---
 - name: Install default packages
-  sudo: True
+  become: True
   apt: name={{item}} state=latest
   with_items:
     - apt-transport-https

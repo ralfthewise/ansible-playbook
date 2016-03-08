@@ -1,8 +1,8 @@
 ---
 - name: Apt update
-  sudo: True
+  become: True
   apt: update_cache=yes
 
 - name: Apt upgrade
-  sudo: True
+  become: True
   apt: upgrade=yes

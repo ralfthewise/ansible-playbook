@@ -7,12 +7,12 @@
   shell: wget -nv "http://golang.org/dl/{{golang_tarball}}" -O "/tmp/{{golang_tarball}}"
 
 - name: Delete old go
-  sudo: True
+  become: True
   when: golang.stdout == "required"
   shell: rm -rf /usr/local/go
 
 - name: Install go
-  sudo: True
+  become: True
   when: golang.stdout == "required"
   shell: tar -C /usr/local -zxf "/tmp/{{golang_tarball}}"
 

@@ -1,6 +1,6 @@
 ---
 - name: Install lilyterm
-  sudo: True
+  become: True
   apt: name=lilyterm state=latest
 
 - name: Create lilyterm config directory

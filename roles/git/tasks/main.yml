@@ -1,6 +1,6 @@
 ---
 - name: Install git
-  sudo: True
+  become: True
   apt: name=git state=latest
 
 - stat: path=~/.gitconfig

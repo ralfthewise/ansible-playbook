@@ -3,15 +3,15 @@
   register: docker
 
 - name: Install docker
-  sudo: True
+  become: True
   when: not docker.stat.exists
   shell: wget -qO- https://get.docker.com/ | sh
 
 - name: Add tim to docker group
-  sudo: True
+  become: True
   user: name=tim groups=docker append=yes
 
 - name: Restart docker daemon
-  sudo: True
+  become: True
   when: not docker.stat.exists
   service: name=docker state=restarted

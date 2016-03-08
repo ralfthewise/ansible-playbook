@@ -1,6 +1,6 @@
 ---
 - name: Include adams config
-  sudo: True
+  become: True
   lineinfile:
     dest: /etc/auto.master
     regexp: '/etc/auto.adams$'
@@ -9,7 +9,7 @@
     - Restart autofs
 
 - name: Install adams config
-  sudo: True
+  become: True
   copy: src=roles/autofs_client/files/auto.adams dest=/etc/auto.adams owner=root group=root mode=0644
   notify:
     - Restart autofs

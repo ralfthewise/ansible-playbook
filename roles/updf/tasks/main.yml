@@ -3,13 +3,13 @@
   register: updf
 
 - name: Add updf repo
-  sudo: True
+  become: True
   when: not updf.stat.exists
   apt_repository: repo='ppa:atareao/updf'
   ignore_errors: yes
 
 - name: Set repo version
-  sudo: True
+  become: True
   when: not updf.stat.exists
   lineinfile:
     dest: /etc/apt/sources.list.d/ppa_atareao_updf_{{ ansible_distribution_release }}.list
@@ -17,23 +17,23 @@
     line: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu quantal main'
 
 - name: Apt update
-  sudo: True
+  become: True
   when: not updf.stat.exists
   apt: update_cache=yes
 
 - name: Install updf
-  sudo: True
+  become: True
   apt: name=updf state=latest
 
 - name: Fix updf toolbar 1
-  sudo: True
+  become: True
   lineinfile:
     dest: /usr/share/updf/updf.py
     regexp: "toolbar.set_property\\(\"toolbar_style\",'icons'\\)"
     line: "#toolbar.set_property(\"toolbar_style\",'icons')"
 
 - name: Fix updf toolbar 2
-  sudo: True
+  become: True
   lineinfile:
     dest: /usr/share/updf/updf.py
     regexp: "toolbar2.set_property\\(\"toolbar_style\",'icons'\\)"

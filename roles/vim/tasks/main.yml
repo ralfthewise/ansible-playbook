@@ -3,7 +3,7 @@
   register: vim
 
 - name: Install build dependencies
-  sudo: True
+  become: True
   shell: apt-get -y build-dep vim-gtk
 
 - name: Create dev dir
@@ -22,12 +22,12 @@
   shell: make chdir=~/dev/vim
 
 - name: Install vim
-  sudo: True
+  become: True
   when: not vim.stat.exists
   shell: make install chdir=/home/tim/dev/vim
 
 - name: Install vim symbolic links
-  sudo: True
+  become: True
   when: not vim.stat.exists
   shell: ln -s /usr/local/vim/bin/* /usr/local/bin
 
