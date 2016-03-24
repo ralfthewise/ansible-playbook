@@ -12,20 +12,20 @@
   when: not java.stat.exists
   apt: update_cache=yes
 
-- name: Accept java 7 license
-  become: True
-  when: not java.stat.exists
-  shell: echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-
-- name: Install java 7
-  become: True
-  apt: name=oracle-java7-installer state=latest
-
-#- name: Accept java 8 license
+#- name: Accept java 7 license
 #  become: True
 #  when: not java.stat.exists
-#  shell: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+#  shell: echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
-#- name: Install java 8
+#- name: Install java 7
 #  become: True
-#  apt: name=oracle-java8-installer state=latest
+#  apt: name=oracle-java7-installer state=latest
+
+- name: Accept java 8 license
+  become: True
+  when: not java.stat.exists
+  shell: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+
+- name: Install java 8
+  become: True
+  apt: name=oracle-java8-installer state=latest
