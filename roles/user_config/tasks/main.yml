@@ -35,3 +35,15 @@
 
 - name: Add git doglog
   shell: git config --global alias.doglog "log --graph --pretty=format:'%h -%C(yellow)%d%Creset %C(bold white)%s%Creset %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=iso"
+
+- name: Set show dirty state
+  lineinfile:
+    dest: ~/.bashrc
+    regexp: ^export GIT_PS1_SHOWDIRTYSTATE=.*
+    line: export GIT_PS1_SHOWDIRTYSTATE=1
+
+- name: Set git prompt
+  lineinfile:
+    dest: ~/.bashrc
+    regexp: ^export PS1=.*
+    line: export PS1='[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")]\$ '
