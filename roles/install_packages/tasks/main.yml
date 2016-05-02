@@ -39,6 +39,7 @@
     - x11vnc
     - xdotool
     - xtightvncviewer
+    - pavucontrol #PulseAudio Volume Control
     #also need https://git.lekensteyn.nl/ltunify/
     #also included at some point but no longer use
     #- clipit #view clipboard history
