@@ -8,6 +8,7 @@
   gather_facts: False
 
   roles:
+    - apt_config
     - install_packages
     - git
     - java

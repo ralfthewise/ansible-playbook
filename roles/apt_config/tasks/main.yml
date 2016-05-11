@@ -1,0 +1,37 @@
+---
+- name: Enable restricted source packages
+  become: True
+  lineinfile:
+    dest: /etc/apt/sources.list
+    regexp: '.+deb-src http://us.archive.ubuntu.com/ubuntu/ ([^\s\-]+) main restricted$'
+    backrefs: True
+    line: 'deb-src http://us.archive.ubuntu.com/ubuntu/ \1 main restricted'
+
+- name: Enable restricted updates source packages
+  become: True
+  lineinfile:
+    dest: /etc/apt/sources.list
+    regexp: '.+deb-src http://us.archive.ubuntu.com/ubuntu/ ([^\s\-]+-updates) main restricted$'
+    backrefs: True
+    line: 'deb-src http://us.archive.ubuntu.com/ubuntu/ \1 main restricted'
+
+- name: Enable universe source packages
+  become: True
+  lineinfile:
+    dest: /etc/apt/sources.list
+    regexp: '.+deb-src http://us.archive.ubuntu.com/ubuntu/ ([^\s\-]+) universe$'
+    backrefs: True
+    line: 'deb-src http://us.archive.ubuntu.com/ubuntu/ \1 universe'
+
+- name: Enable universe source updates packages
+  become: True
+  lineinfile:
+    dest: /etc/apt/sources.list
+    regexp: '.+deb-src http://us.archive.ubuntu.com/ubuntu/ ([^\s\-]+-updates) universe$'
+    backrefs: True
+    line: 'deb-src http://us.archive.ubuntu.com/ubuntu/ \1 universe'
+
+- name: Apt update
+  become: True
+  apt: update_cache=yes
+

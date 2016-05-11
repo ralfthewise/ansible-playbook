@@ -7,7 +7,8 @@
     - asunder #music CD ripper
     - autofs
     - build-essential
-    - compton #compositing manager for lightweight desktops like openbox, xfce, etc.
+    - aptitude
+    #- compton #compositing manager for lightweight desktops like openbox, xfce, etc.
     - cscope
     - curl
     - exuberant-ctags
@@ -18,7 +19,7 @@
     - libreoffice
     - libstdc++6:i386
     - mercurial
-    - mplayer2
+    - mplayer #mplayer2 is dead, maybe replace with mpv?
     - ntp
     - openssh-client
     - openssh-server
