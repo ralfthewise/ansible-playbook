@@ -11,7 +11,7 @@
 
 - name: Checkout vim source
   when: not vim.stat.exists
-  hg: repo=https://vim.googlecode.com/hg/ dest=~/dev/vim
+  git: repo=https://github.com/vim/vim.git dest=~/dev/vim
 
 - name: Configure vim source
   when: not vim.stat.exists
