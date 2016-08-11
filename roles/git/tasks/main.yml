@@ -12,3 +12,18 @@
 
 - name: Use git instead of https
   shell: git config --global url.git@github.com:.insteadOf https://github.com/
+
+- name: Add git-lfs key
+  become: True
+  apt_key: url='https://packagecloud.io/github/git-lfs/gpgkey'
+
+- name: Add git-lfs repository
+  become: True
+  apt_repository: repo='deb https://packagecloud.io/github/git-lfs/ubuntu/ trusty main' state=present update_cache=yes
+
+- name: Install git-lfs
+  become: True
+  apt: name=git-lfs state=latest
+
+- name: Install git-lfs filters
+  shell: git lfs install
