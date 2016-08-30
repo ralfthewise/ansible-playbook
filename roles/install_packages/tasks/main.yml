@@ -46,3 +46,9 @@
     #also included at some point but no longer use
     #- clipit #view clipboard history
     #- compiz-plugins-extra #original alt-tab application switcher
+
+- name: Install pip packages
+  become: True
+  pip: name={{item}} state=latest
+  with_items:
+    - awscli
