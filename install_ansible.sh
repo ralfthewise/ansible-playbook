@@ -18,5 +18,5 @@ if [ ! -f "/usr/bin/ansible" ]; then
 
   #as a last resort, pip to the rescue!
   sudo apt-get -y -q install python-pip python-setuptools libffi-dev libcurl4-openssl-dev libssl-dev
-  sudo pip install ansible
+  sudo -i pip install ansible
 fi
