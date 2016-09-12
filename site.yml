@@ -21,7 +21,7 @@
     - google_chrome
     #- hipchat
     - user_config
-    - lilyterm
+    #- lilyterm
     - ubuntu_config
     - virtualbox
     - mkusb #better usb startup disk creator: https://help.ubuntu.com/community/mkusb
