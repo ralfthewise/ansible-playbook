@@ -25,7 +25,7 @@
     - {role: virtualbox, tags: ['virtualbox']}
     - mkusb #better usb startup disk creator: https://help.ubuntu.com/community/mkusb
     - {role: updf, tags: ['updf']}
-    #- autofs_client
+    #- {role: autofs_client, tags: ['autofs_client']}
 
 - name: Ping hosts
   hosts: ping

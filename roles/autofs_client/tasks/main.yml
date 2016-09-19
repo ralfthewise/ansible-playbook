@@ -1,4 +1,8 @@
 ---
+- name: Install autofs
+  become: True
+  apt: name=autofs state=latest
+
 - name: Include adams config
   become: True
   lineinfile:
