@@ -6,7 +6,6 @@
 - name: Default provisioning task
   hosts: all
   gather_facts: False
-
   roles:
     - apt_config
     - install_packages
@@ -23,9 +22,9 @@
     - user_config
     #- lilyterm
     - ubuntu_config
-    - virtualbox
+    - {role: virtualbox, tags: ['virtualbox']}
     - mkusb #better usb startup disk creator: https://help.ubuntu.com/community/mkusb
-    #- updf
+    - {role: updf, tags: ['updf']}
     #- autofs_client
 
 - name: Ping hosts

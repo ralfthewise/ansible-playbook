@@ -2,28 +2,50 @@
 - stat: path=/usr/bin/updf
   register: updf
 
-- name: Add updf repo
-  become: True
-  when: not updf.stat.exists
-  apt_repository: repo='ppa:atareao/updf'
-  ignore_errors: yes
+# Using the PPA no longer seems to work:
 
-- name: Set repo version
-  become: True
-  when: not updf.stat.exists
-  lineinfile:
-    dest: /etc/apt/sources.list.d/ppa_atareao_updf_{{ ansible_distribution_release }}.list
-    regexp: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu {{ ansible_distribution_release }} main'
-    line: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu quantal main'
+#- name: Add updf repo
+#  become: True
+#  when: not updf.stat.exists
+#  apt_repository: repo='ppa:atareao/updf'
+#  ignore_errors: yes
 
-- name: Apt update
+#- name: Set repo version
+#  become: True
+#  when: not updf.stat.exists
+#  lineinfile:
+#    dest: /etc/apt/sources.list.d/ppa_atareao_updf_{{ ansible_distribution_release }}.list
+#    regexp: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu {{ ansible_distribution_release }} main'
+#    line: 'deb http://ppa.launchpad.net/atareao/updf/ubuntu quantal main'
+
+#- name: Apt update
+#  become: True
+#  when: not updf.stat.exists
+#  apt: update_cache=yes
+
+#- name: Install updf
+#  become: True
+#  apt: name=updf state=latest
+
+- name: Install updf dependencies
   become: True
-  when: not updf.stat.exists
-  apt: update_cache=yes
+  apt: name={{item}} state=latest
+  with_items:
+    - gir1.2-poppler-0.18
+    - gir1.2-rsvg-2.0
+    - python-imaging
+    - python-numpy
+    - python-pil
+    - python-gi
+    - python-gi-cairo
 
 - name: Install updf
   become: True
-  apt: name=updf state=latest
+  when: not updf.stat.exists
+  shell: |
+    curl -o /tmp/updf_0.0.2.4-1ubuntu1_all.deb http://ppa.launchpad.net/atareao/updf/ubuntu/pool/main/u/updf/updf_0.0.2.4-1ubuntu1_all.deb &&
+    dpkg -i /tmp/updf_0.0.2.4-1ubuntu1_all.deb &&
+    rm -f /tmp/updf_0.0.2.4-1ubuntu1_all.deb
 
 - name: Fix updf toolbar 1
   become: True
