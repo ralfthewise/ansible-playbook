@@ -16,7 +16,7 @@
     - nodejs
     - postgresql
     - vim
-    - docker
+    - {role: docker, tags: ['docker']}
     - google_chrome
     #- hipchat
     - user_config

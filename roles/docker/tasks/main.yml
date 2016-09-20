@@ -1,17 +1,24 @@
 ---
-- stat: path=/usr/bin/docker
-  register: docker
-
-- name: Install docker
+- name: docker apt repository key
   become: True
-  when: not docker.stat.exists
-  shell: wget -qO- https://get.docker.com/ | sh
+  apt_key: keyserver='hkp://keyserver.ubuntu.com:80' id=58118E89F3A912897C070ADBF76221572C52609D
 
-- name: Add tim to docker group
+- name: docker apt repository
   become: True
-  user: name=tim groups=docker append=yes
+  apt_repository: repo="deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main" state=present update_cache=yes
 
-- name: Restart docker daemon
+- name: make sure lxc-docker is not installed
   become: True
-  when: not docker.stat.exists
-  service: name=docker state=restarted
+  apt: name=lxc-docker state=absent update_cache=yes cache_valid_time=600 purge=yes
+
+- name: install docker-engine
+  become: True
+  apt: name=docker-engine state=latest update_cache=yes cache_valid_time=600
+
+#- name: install pip
+#  become: True
+#  apt: name=python-pip state=latest update_cache=yes cache_valid_time=600
+
+#- name: install docker-py module
+#  become: True
+#  pip: name=docker-py state=present version=1.7.0
