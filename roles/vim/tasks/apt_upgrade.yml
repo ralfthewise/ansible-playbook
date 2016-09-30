@@ -1,8 +1,0 @@
----
-- name: Apt update
-  become: True
-  apt: update_cache=yes
-
-- name: Apt upgrade
-  become: True
-  apt: upgrade=yes

@@ -15,7 +15,7 @@
     - rvm
     - nodejs
     - postgresql
-    - vim
+    - {role: vim, tags: ['vim']}
     - {role: docker, tags: ['docker']}
     - google_chrome
     #- hipchat
