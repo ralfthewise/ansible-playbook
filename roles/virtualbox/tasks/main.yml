@@ -24,10 +24,16 @@
   when: not vbox.stat.exists
   apt_repository: repo="deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib" state=present update_cache=yes
 
+- name: accept virtualbox extensions license
+  become: True
+  debconf: name=virtualbox-ext-pack question=virtualbox-ext-pack/license value=true vtype=select
+
 - name: install virtualbox
   become: True
-  when: not vbox.stat.exists
-  apt: name=virtualbox state=latest update_cache=yes cache_valid_time=600
+  apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
+  with_items:
+    - virtualbox
+    - virtualbox-ext-pack
 
 - name: Add keyfile section to NetworkManager.conf
   become: True
