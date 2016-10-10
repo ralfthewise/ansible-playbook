@@ -5,7 +5,6 @@
 
 - name: Disable main caffeine startup app
   lineinfile:
-    #dest: "{{'~' + target_user | expanduser }}/.config/autostart/caffeine.desktop"
     dest: ~/.config/autostart/caffeine.desktop
     regexp: "X-GNOME-Autostart-enabled=.*"
     line: "X-GNOME-Autostart-enabled=false"
