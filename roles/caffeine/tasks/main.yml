@@ -1,5 +1,5 @@
 ---
-- name: Install updf dependencies
+- name: Install caffeine
   become: True
   apt: name=caffeine state=latest
 
