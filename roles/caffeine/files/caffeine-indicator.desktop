@@ -1,0 +1,10 @@
+[Desktop Entry]
+Icon=caffeine
+Type=Application
+Exec=/usr/bin/caffeine-indicator
+Terminal=false
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Caffeine Indicator
+Comment=Indicator to temporarily deactivate the screensaver and sleep mode

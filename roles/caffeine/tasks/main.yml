@@ -1,0 +1,14 @@
+---
+- name: Install updf dependencies
+  become: True
+  apt: name=caffeine state=latest
+
+- name: Disable main caffeine startup app
+  lineinfile:
+    #dest: "{{'~' + target_user | expanduser }}/.config/autostart/caffeine.desktop"
+    dest: ~/.config/autostart/caffeine.desktop
+    regexp: "X-GNOME-Autostart-enabled=.*"
+    line: "X-GNOME-Autostart-enabled=false"
+
+- name: Enable caffeine indicator startup app
+  copy: src=roles/caffeine/files/caffeine-indicator.desktop dest=~/.config/autostart/caffeine-indicator.desktop mode=0664
