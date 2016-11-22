@@ -5,7 +5,7 @@
 - name: Add rvm GPG key
   become: True
   when: not rvm.stat.exists
-  shell: gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+  shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 
 - name: Install rvm
   become: True
