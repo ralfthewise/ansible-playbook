@@ -14,6 +14,7 @@
     - golang
     - rvm
     - nodejs
+    - {role: android, tags: ['android']}
     - postgresql
     - {role: vim, tags: ['vim']}
     - {role: docker, tags: ['docker']}

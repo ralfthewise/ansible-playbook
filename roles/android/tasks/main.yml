@@ -1,0 +1,3 @@
+---
+- name: Add appropriate paths
+  lineinfile: dest=~/.bashrc line='export PATH=$PATH:~/Android/Sdk/platform-tools:~/Android/Sdk/tools'

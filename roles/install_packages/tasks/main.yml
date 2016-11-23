@@ -37,6 +37,7 @@
     - unzip
     - p7zip-full
     - wget
+    - mesa-utils #glxinfo, etc.
     - x11vnc
     - xdotool
     - xtightvncviewer
