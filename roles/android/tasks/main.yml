@@ -1,3 +1,16 @@
 ---
+- name: Install dependencies
+  become: True
+  apt: name={{item}} state=latest
+  with_items:
+    - qemu-kvm
+    - libvirt-bin
+    - ubuntu-vm-builder
+    - bridge-utils
+
+- name: Add current user to libvirtd
+  become: True
+  user: name={{ansible_user}} groups=libvirtd append=yes
+
 - name: Add appropriate paths
   lineinfile: dest=~/.bashrc line='export PATH=$PATH:~/Android/Sdk/platform-tools:~/Android/Sdk/tools'
