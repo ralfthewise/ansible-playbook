@@ -17,5 +17,8 @@
   become: True
   user: name={{ansible_user}} groups=libvirtd append=yes
 
+- name: Add ANDROID_HOME environment variable
+  lineinfile: dest=~/.bashrc line='export ANDROID_HOME=~/Android/Sdk'
+
 - name: Add appropriate paths
   lineinfile: dest=~/.bashrc line='export PATH=$PATH:~/Android/Sdk/platform-tools:~/Android/Sdk/tools'
