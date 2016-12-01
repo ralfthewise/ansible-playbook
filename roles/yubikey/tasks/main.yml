@@ -1,0 +1,13 @@
+---
+- name: Add yubico repo
+  become: True
+  apt_repository: repo='ppa:yubico/stable' state=present update_cache=yes
+
+- name: Install yubikey apps
+  become: True
+  apt: name={{item}} state=latest
+  with_items:
+    - yubikey-personalization-gui
+    - yubikey-neo-manager
+    - yubikey-piv-manager
+    - libpam-yubico

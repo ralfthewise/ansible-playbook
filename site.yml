@@ -27,6 +27,7 @@
     - mkusb #better usb startup disk creator: https://help.ubuntu.com/community/mkusb
     - {role: caffeine, tags: ['caffeine']}
     - {role: updf, tags: ['updf']}
+    - {role: yubikey, tags: ['yubikey']}
     #- {role: autofs_client, tags: ['autofs_client']}
 
 - name: Ping hosts
