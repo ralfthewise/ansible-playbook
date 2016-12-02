@@ -28,6 +28,7 @@
     - {role: caffeine, tags: ['caffeine']}
     - {role: updf, tags: ['updf']}
     - {role: yubikey, tags: ['yubikey']}
+    - {role: generic_colorizer, tags: ['grc']}
     #- {role: autofs_client, tags: ['autofs_client']}
 
 - name: Ping hosts

@@ -1,0 +1,7 @@
+---
+- name: Install grc
+  become: True
+  apt: name=grc state=latest
+
+- name: Update grc config
+  copy: src=roles/generic_colorizer/files/grc/ dest=~/.grc
