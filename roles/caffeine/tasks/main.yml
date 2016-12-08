@@ -3,6 +3,9 @@
   become: True
   apt: name=caffeine state=latest
 
+- name: Create autostart dir
+  file: path=~/.config/autostart state=directory mode=0700
+
 - name: Disable caffeine startup app
   copy: src=roles/caffeine/files/caffeine.desktop dest=~/.config/autostart/caffeine.desktop mode=0664
 

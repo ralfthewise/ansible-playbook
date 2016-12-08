@@ -15,7 +15,11 @@
 
 - name: Add current user to libvirtd
   become: True
-  user: name={{ansible_user}} groups=libvirtd append=yes
+  user: name={{ansible_user}} groups={{item}} append=yes
+  ignore_errors: True
+  with_items:
+    - libvirt
+    - libvirtd
 
 - name: Add ANDROID_HOME environment variable
   lineinfile: dest=~/.bashrc line='export ANDROID_HOME=~/Android/Sdk'
