@@ -13,7 +13,6 @@
     - curl
     - exuberant-ctags
     - gimp
-    - indicator-multiload
     - keepass2
     - libc6:i386
     - libreoffice

@@ -7,7 +7,7 @@
   file: path=~/.config/autostart state=directory mode=0700
 
 - name: Disable caffeine startup app
-  copy: src=roles/caffeine/files/caffeine.desktop dest=~/.config/autostart/caffeine.desktop mode=0664
+  copy: src=roles/caffeine/files/caffeine.desktop dest=~/.config/autostart/caffeine.desktop mode=0644
 
 - name: Enable caffeine indicator startup app
-  copy: src=roles/caffeine/files/caffeine-indicator.desktop dest=~/.config/autostart/caffeine-indicator.desktop mode=0664
+  copy: src=roles/caffeine/files/caffeine-indicator.desktop dest=~/.config/autostart/caffeine-indicator.desktop mode=0644

@@ -1,0 +1,12 @@
+---
+- name: Install indicator-multiload
+  become: True
+  apt: name=indicator-multiload state=latest
+
+- name: Create autostart dir
+  file: path=~/.config/autostart state=directory mode=0700
+
+- name: Enable indicator-multiload startup app
+  copy: src=roles/indicator-multiload/files/indicator-multiload.desktop dest=~/.config/autostart/indicator-multiload.desktop mode=0644
+
+#TODO - configure the preferences of the indicator

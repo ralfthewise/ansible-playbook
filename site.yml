@@ -26,6 +26,7 @@
     - {role: virtualbox, tags: ['virtualbox']}
     - mkusb #better usb startup disk creator: https://help.ubuntu.com/community/mkusb
     - {role: caffeine, tags: ['caffeine']}
+    - {role: indicator-multiload, tags: ['indicator-multiload']}
     - {role: updf, tags: ['updf']}
     - {role: yubikey, tags: ['yubikey']}
     - {role: generic_colorizer, tags: ['grc']}
