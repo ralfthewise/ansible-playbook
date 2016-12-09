@@ -16,6 +16,10 @@
   become: True
   apt: name=docker-engine state=latest update_cache=yes cache_valid_time=600
 
+- name: Add current user to docker group
+  become: True
+  user: name={{ansible_user}} groups=docker append=yes
+
 #- name: install pip
 #  become: True
 #  apt: name=python-pip state=latest update_cache=yes cache_valid_time=600
