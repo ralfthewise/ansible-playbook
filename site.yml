@@ -13,7 +13,7 @@
     - java
     - golang
     - rvm
-    - nodejs
+    - {role: nodejs, tags: ['nodejs', 'node']}
     - {role: android, tags: ['android']}
     - postgresql
     - {role: vim, tags: ['vim']}
