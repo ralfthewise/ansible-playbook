@@ -25,4 +25,4 @@
   lineinfile: dest=~/.bashrc line='export ANDROID_HOME=~/Android/Sdk'
 
 - name: Add appropriate paths
-  lineinfile: dest=~/.bashrc line='export PATH=$PATH:~/Android/Sdk/platform-tools:~/Android/Sdk/tools'
+  lineinfile: dest=~/.bashrc line='export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools'
