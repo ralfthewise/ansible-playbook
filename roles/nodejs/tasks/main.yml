@@ -15,18 +15,10 @@
   become: True
   apt: name=nodejs state=latest update_cache=yes cache_valid_time=86400
 
-- stat: path=/usr/bin/coffee
-  register: coffeescript
-
-- name: Install coffeescript
+- name: Install global node packages
   become: True
-  when: not coffeescript.stat.exists
-  shell: npm install -g coffee-script
-
-- stat: path=/usr/bin/coffeelint
-  register: coffeelint
-
-- name: Install coffeelint
-  become: True
-  when: not coffeelint.stat.exists
-  shell: npm install -g coffeelint
+  shell: npm install -g {{item}}
+  with_items:
+    - npm
+    - coffee-script
+    - coffeelint
