@@ -22,6 +22,7 @@
     - ntp
     - openssh-client
     - openssh-server
+    - libnss3-tools #work with certificates - certutil
     - picard #rename/tag mp3 files based on online signatures
     - python-pip
     - rdesktop

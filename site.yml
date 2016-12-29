@@ -8,7 +8,7 @@
   gather_facts: False
   roles:
     - apt_config
-    - install_packages
+    - {role: install_packages, tags: ['packages']}
     - git
     - java
     - golang
