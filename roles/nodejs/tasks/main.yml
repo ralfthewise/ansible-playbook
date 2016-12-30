@@ -15,6 +15,18 @@
   become: True
   apt: name=nodejs state=latest update_cache=yes cache_valid_time=86400
 
+- name: Yarn apt repository key
+  become: True
+  apt_key: url='https://dl.yarnpkg.com/debian/pubkey.gpg'
+
+- name: Add yarn repo
+  become: True
+  apt_repository: repo="deb https://dl.yarnpkg.com/debian/ stable main" state=present update_cache=yes
+
+- name: Install yarn
+  become: True
+  apt: name=yarn state=latest
+
 - name: Install global node packages
   become: True
   shell: npm install -g {{item}}
