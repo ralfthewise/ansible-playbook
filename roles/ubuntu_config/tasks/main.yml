@@ -27,7 +27,8 @@
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/panel-first-menu '"Disabled"' #don't show application first menu on Alt-F10
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/reveal-trigger 0
 - shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/reveal-pressure 1
-- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1
+- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1 #hide launcher unless mouse over it
+- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-capture-mouse false #no sticky edges for multi-monitor?
 - shell: dconf write /org/compiz/profiles/unity/plugins/core/hsize 4
 - shell: dconf write /org/compiz/profiles/unity/plugins/core/vsize 1
 - shell: dconf write /org/compiz/profiles/unity/plugins/wall/allow-wraparound true
