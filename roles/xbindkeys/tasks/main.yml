@@ -1,0 +1,13 @@
+---
+- name: Install xbindkeys
+  become: True
+  apt: name=xbindkeys state=latest
+
+- name: Create xbindkeys config
+  copy: src=roles/xbindkeys/files/xbindkeysrc dest=~/.xbindkeysrc mode=0600
+
+- name: Create bin dir
+  file: path=~/bin state=directory mode=0700
+
+- name: Create toggle_chat.sh script
+  copy: src=roles/xbindkeys/files/toggle_chat.sh dest=~/bin/toggle_chat.sh mode=0700
