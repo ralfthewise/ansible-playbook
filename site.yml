@@ -24,6 +24,7 @@
     #- lilyterm
     - {role: ubuntu_config, tags: ['ubuntu_config']}
     - {role: virtualbox, tags: ['virtualbox']}
+    - {role: vagrant, tags: ['vagrant']}
     - mkusb #better usb startup disk creator: https://help.ubuntu.com/community/mkusb
     - {role: caffeine, tags: ['caffeine']}
     - {role: indicator-multiload, tags: ['indicator-multiload']}

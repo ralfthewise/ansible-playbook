@@ -1,0 +1,22 @@
+---
+- shell: dpkg-query --showformat='${Version}' --show vagrant
+  ignore_errors: True
+  register: vagrant_installed_version
+
+- shell: curl -s https://releases.hashicorp.com/vagrant/index.json | jq --raw-output '.versions | to_entries | max_by(.key) | .value.builds | .[] | select(.arch=="x86_64") | select(.os=="debian") | .version'
+  register: vagrant_version
+
+- shell: curl -s https://releases.hashicorp.com/vagrant/index.json | jq --raw-output '.versions | to_entries | max_by(.key) | .value.builds | .[] | select(.arch=="x86_64") | select(.os=="debian") | .url'
+  when: 'vagrant_version.stdout not in vagrant_installed_version.stdout'
+  register: vagrant_url
+
+- name: Download vagrant deb
+  when: 'vagrant_version.stdout not in vagrant_installed_version.stdout'
+  get_url:
+    url: "{{vagrant_url.stdout}}"
+    dest: /tmp/vagrant.deb
+
+- name: Install vagrant deb
+  become: True
+  when: 'vagrant_version.stdout not in vagrant_installed_version.stdout'
+  apt: deb=/tmp/vagrant.deb force=True

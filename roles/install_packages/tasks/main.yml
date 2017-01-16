@@ -11,6 +11,7 @@
     #- compton #compositing manager for lightweight desktops like openbox, xfce, etc.
     - cscope
     - curl
+    - jq
     - exuberant-ctags
     - gimp
     - keepass2
