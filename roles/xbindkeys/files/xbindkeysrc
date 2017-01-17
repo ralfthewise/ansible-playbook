@@ -1,2 +1,17 @@
+#Toggl Chat (Super+F12)
 "toggle_chat.sh"
   Mod4 + F12
+
+#Super+F12 down
+#"echo F12 down >> /tmp/f12.log"
+#  m:0x50 + c:96
+#  NoSymbol
+
+#Super+F12 up
+#"echo F12 up >> /tmp/f12.log"
+#  m:0x50 + c:96 + Release
+#  NoSymbol
+
+#Ctrl Mute
+"xdotool key --clearmodifiers XF86AudioMicMute"
+  Control+Mod2 + XF86AudioMute + Release
