@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CHAT_TITLE='Google Hangouts'
+CHAT_TITLE='Google Hangouts - garton.tim@gmail.com'
 
 #Get our chat window
 CHAT_WIN_ID=$(wmctrl -l | grep "$CHAT_TITLE" | awk '{print $1}')
