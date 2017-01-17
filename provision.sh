@@ -14,5 +14,5 @@ export ANSIBLE_HOST ANSIBLE_GROUPS
 #fucking do this shit, bitch!!
 ansible-playbook site.yml -vv -i dynamic.py --ask-become-pass "$@"
 
-echo "run 'caffeine-indicator' until the next reboot, when it should start automatically"
+echo "The following startup applications will be launched upon next login: caffeine-indicator, xbindkeys"
 popd &> /dev/null
