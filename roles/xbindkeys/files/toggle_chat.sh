@@ -20,6 +20,7 @@ wmctrl -i -r $CHAT_WIN_ID -b add,sticky,skip_taskbar
 
 if [ -e /tmp/chat_displayed ]; then
   #Hide the chat window
+  wmctrl -i -r $CHAT_WIN_ID -b remove,above,modal
   wmctrl -i -r $CHAT_WIN_ID -b add,below
 
   #Display the previous window
@@ -33,5 +34,6 @@ else
 
   #Display the chat window
   wmctrl -i -r $CHAT_WIN_ID -b remove,below
+  wmctrl -i -r $CHAT_WIN_ID -b add,above,modal
   wmctrl -i -a $CHAT_WIN_ID
 fi
