@@ -1,6 +1,10 @@
-#Toggl Chat (Super+F12)
+#Toggle Chat (Super+F12)
 "toggle_chat.sh"
   Mod4 + F12
+
+#Toggle Chat (Calculator)
+"toggle_chat.sh"
+  Mod2 + XF86Calculator
 
 #Super+F12 down
 #"echo F12 down >> /tmp/f12.log"
