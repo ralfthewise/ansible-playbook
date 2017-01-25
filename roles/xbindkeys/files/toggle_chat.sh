@@ -36,4 +36,6 @@ else
   wmctrl -i -r $CHAT_WIN_ID -b remove,below
   wmctrl -i -r $CHAT_WIN_ID -b add,above,modal
   wmctrl -i -a $CHAT_WIN_ID
+  sleep 0.2 #Wait for window to be displayed
+  xdotool key space BackSpace #Hangouts requires some action to mark current chat as read
 fi
