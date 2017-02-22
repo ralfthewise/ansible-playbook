@@ -5,6 +5,7 @@
   with_items:
     - apt-transport-https
     - asunder #music CD ripper
+    - lame #needed to asunder to rip to mp3
     - autofs
     - build-essential
     - aptitude
