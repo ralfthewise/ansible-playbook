@@ -33,6 +33,9 @@
 - name: Export HISTFILESIZE HISTSIZE HISTTIMEFORMAT
   lineinfile: dest=~/.bashrc line='export HISTFILESIZE HISTSIZE HISTTIMEFORMAT'
 
+- name: Create screen config
+  copy: src=roles/user_config/files/screenrc dest=~/.screenrc mode=0600
+
 - name: Add git doglog
   shell: git config --global alias.doglog "log --graph --pretty=format:'%h -%C(yellow)%d%Creset %C(bold white)%s%Creset %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=iso"
 

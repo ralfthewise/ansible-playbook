@@ -1,0 +1,2 @@
+bindkey "^[[5;2~" eval "copy" "stuff ^b"
+bindkey "^[[6;2~" eval "copy" "stuff ^f"

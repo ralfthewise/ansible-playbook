@@ -20,7 +20,7 @@
     - {role: docker, tags: ['docker']}
     - google_chrome
     #- hipchat
-    - user_config
+    - {role: user_config, tags: ['user_config']}
     #- lilyterm
     - {role: ubuntu_config, tags: ['ubuntu_config']}
     - {role: virtualbox, tags: ['virtualbox']}
