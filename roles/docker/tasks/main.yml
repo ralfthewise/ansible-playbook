@@ -20,6 +20,14 @@
   become: True
   user: name={{ansible_user}} groups=docker append=yes
 
+- name: Install docker-compose
+  become: True
+  pip: name=docker-compose state=latest
+
+- name: Install docker-compose bash completions
+  become: True
+  shell: curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
 #- name: install pip
 #  become: True
 #  apt: name=python-pip state=latest update_cache=yes cache_valid_time=600
