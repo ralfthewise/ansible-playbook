@@ -13,8 +13,11 @@
 - name: Use git instead of https
   shell: git config --global url.git@github.com:.insteadOf https://github.com/
 
-- name: Make default merge --no-ff
+- name: Make default merge no-ff
   shell: git config --global merge.ff no
+
+- name: Make default pull ff
+  shell: git config --global pull.ff yes
 
 - name: Add git-lfs key
   become: True
