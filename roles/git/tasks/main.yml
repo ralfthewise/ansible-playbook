@@ -19,6 +19,9 @@
 - name: Make default pull ff
   shell: git config --global pull.ff yes
 
+- name: Make default conflict deff3
+  shell: git config --global merge.conflictstyle diff3
+
 - name: Add git-lfs key
   become: True
   apt_key: url='https://packagecloud.io/github/git-lfs/gpgkey'
