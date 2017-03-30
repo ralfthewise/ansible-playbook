@@ -9,7 +9,7 @@
   roles:
     - apt_config
     - {role: install_packages, tags: ['packages']}
-    - git
+    - {role: git, tags: ['git']}
     - java
     - golang
     - rvm

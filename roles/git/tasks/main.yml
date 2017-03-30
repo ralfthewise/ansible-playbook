@@ -3,7 +3,7 @@
   become: True
   apt: name=git state=latest
 
-- stat: path=~/.gitconfig
+- stat: path=~/.config/git/config
   register: gitconfig
 
 - name: Configure git
