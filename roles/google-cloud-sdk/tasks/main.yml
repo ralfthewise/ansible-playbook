@@ -1,0 +1,12 @@
+---
+- name: Google cloud apt repository key
+  become: True
+  apt_key: url='https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+
+- name: Google cloud repository
+  become: True
+  apt_repository: repo="deb https://packages.cloud.google.com/apt cloud-sdk-{{ansible_distribution_release}} main" state=present update_cache=yes
+
+- name: Install google-cloud-sdk
+  become: True
+  apt: name=google-cloud-sdk state=latest

@@ -14,6 +14,7 @@
     - golang
     - rvm
     - {role: nodejs, tags: ['nodejs', 'node']}
+    - {role: google-cloud-sdk, tags: ['google-cloud-sdk']}
     - {role: android, tags: ['android']}
     - postgresql
     - {role: vim, tags: ['vim']}
