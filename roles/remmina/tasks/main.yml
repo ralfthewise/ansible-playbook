@@ -1,0 +1,8 @@
+---
+- name: Add remmina repo
+  become: True
+  apt_repository: repo='ppa:remmina-ppa-team/remmina-next' state=present update_cache=yes
+
+- name: Install remmina app
+  become: True
+  apt: name=remmina state=latest
