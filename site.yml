@@ -11,7 +11,7 @@
     - {role: install_packages, tags: ['packages']}
     - {role: git, tags: ['git']}
     - java
-    - golang
+    - {role: golang, tags: ['go', 'golang']}
     - rvm
     - {role: nodejs, tags: ['nodejs', 'node']}
     - {role: google-cloud-sdk, tags: ['google-cloud-sdk']}
