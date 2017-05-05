@@ -32,7 +32,7 @@
   become: True
   apt: name={{ item }} state=latest update_cache=yes cache_valid_time=600
   with_items:
-    - virtualbox
+    - virtualbox-5.1
     #- virtualbox-ext-pack #isn't from the virtualbox repo, so causes issues
 
 - name: Add keyfile section to NetworkManager.conf
