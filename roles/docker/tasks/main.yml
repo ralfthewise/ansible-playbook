@@ -18,7 +18,7 @@
 
 - name: Add current user to docker group
   become: True
-  user: name={{ansible_user}} groups=docker append=yes
+  user: name={{ansible_user_id}} groups=docker append=yes
 
 - name: Install docker-compose
   become: True
@@ -27,6 +27,14 @@
 - name: Install docker-compose bash completions
   become: True
   shell: curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
+- name: Install docker-machine
+  become: True
+  shell: curl -L https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && chmod +x /tmp/docker-machine && cp /tmp/docker-machine /usr/local/bin/docker-machine
+
+- name: Install docker-machine bash completions
+  become: True
+  get_url: dest=/etc/bash_completion.d url=https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash mode=644
 
 #- name: install pip
 #  become: True
