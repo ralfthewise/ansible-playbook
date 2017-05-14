@@ -33,6 +33,7 @@
     - {role: updf, tags: ['updf']}
     - {role: yubikey, tags: ['yubikey']}
     - {role: remmina, tags: ['remmina']}
+    - {role: seafile-client, tags: ['seafile-client']}
     - {role: generic_colorizer, tags: ['grc']}
     #- {role: autofs_client, tags: ['autofs_client']}
 

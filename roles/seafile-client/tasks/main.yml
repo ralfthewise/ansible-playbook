@@ -1,0 +1,8 @@
+---
+- name: Add seafile-client repo
+  become: True
+  apt_repository: repo='ppa:seafile/seafile-client' state=present update_cache=yes
+
+- name: Install seafile-client
+  become: True
+  apt: name=seafile-gui state=latest
