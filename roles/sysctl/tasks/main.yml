@@ -1,0 +1,6 @@
+---
+- name: Create custom sysctl config
+  become: True
+  copy: src=roles/sysctl/files/99-custom.conf dest=/etc/sysctl.d/99-custom.conf mode=0644 group=root owner=root backup=no
+  notify:
+    - Reload sysctl

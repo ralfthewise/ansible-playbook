@@ -8,6 +8,7 @@
   gather_facts: False
   roles:
     - apt_config
+    - {role: sysctl, tags: ['sysctl']}
     - {role: install_packages, tags: ['packages']}
     - {role: git, tags: ['git']}
     - java
