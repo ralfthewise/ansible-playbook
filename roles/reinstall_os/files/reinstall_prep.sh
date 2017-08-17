@@ -20,7 +20,7 @@ rsync -av $0 ~/bin/reinstall_finish.sh "$BACKUP_DIR"
 printf "\n\e[32mProcessing home folder\e[0m\n"
 cd
 mkdir -p "$BACKUP_DIR/home"
-rsync -av --delete .ansible.cfg .bash_history .bash_logout .bashrc .gconf .gitconfig .irb-history .local .profile .pry_history .psql_history .ssh .VirtualBox .vnc bin tmp Documents Pictures Music Videos "$BACKUP_DIR/home/"
+rsync -av --delete .ansible.cfg .bash_history .bash_logout .bashrc .gconf .gitconfig .irb-history .local .profile .pry_history .psql_history .ssh .VirtualBox .vnc bin tmp blog Documents Pictures Music Videos "$BACKUP_DIR/home/"
 rsync -av --delete --exclude .config/google-chrome .config "$BACKUP_DIR/home/"
 dconf dump / > "$BACKUP_DIR/home/current-dconf.dump"
 
