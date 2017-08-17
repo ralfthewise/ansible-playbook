@@ -1,0 +1,15 @@
+---
+- name: Create bin dir
+  file: path=~/bin state=directory mode=0700
+
+- name: Create reinstall_prep.sh
+  file:
+    src: "{{role_path}}/files/reinstall_prep.sh"
+    dest: ~/bin/reinstall_prep.sh
+    state: link
+
+- name: Create reinstall_finish.sh
+  file:
+    src: "{{role_path}}/files/reinstall_finish.sh"
+    dest: ~/bin/reinstall_finish.sh
+    state: link

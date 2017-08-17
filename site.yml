@@ -37,6 +37,7 @@
     - {role: seafile-client, tags: ['seafile-client']}
     - {role: generic_colorizer, tags: ['grc']}
     #- {role: autofs_client, tags: ['autofs_client']}
+    - {role: reinstall_os, tags: ['reinstall_os']}
 
 - name: Ping hosts
   hosts: ping
