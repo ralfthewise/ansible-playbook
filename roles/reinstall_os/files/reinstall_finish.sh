@@ -9,16 +9,18 @@ fi
 BACKUP_DIR="$1"
 BACKUP_DIR="$(dirname "$BACKUP_DIR")/$(basename "$BACKUP_DIR")/"
 
-mkdir -p "$BACKUP_DIR"
-
-ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "${ROOT}"
-rsync -av $0 "$BACKUP_DIR"
+BOLD=$(tput bold)
+NORMAL=$(tput sgr0)
 
 #home folder
 printf "\n\e[32mProcessing home folder\e[0m\n"
 cd "$BACKUP_DIR/home"
-rsync -av .ansible.cfg .bash_history .psql_history .ssh bin tmp Documents Pictures Music Videos ~/
+if [[ $(stat -c%s .bash_history) -ge $(stat -c%s ~/.bash_history) ]]; then
+  rsync -av .bash_history ~/.bash_history
+else
+  echo "${BOLD}Skipping .bash_history because existing file is larger than the backup${NORMAL}"
+fi
+rsync -av .ansible.cfg .psql_history .ssh bin tmp blog Documents Pictures Music Videos ~/
 rsync -av .config/VirtualBox/ ~/.config/VirtualBox/
 cd -
 
