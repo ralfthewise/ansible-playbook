@@ -41,8 +41,8 @@ sudo mdadm --detail /dev/md0 > "$BACKUP_DIR/mdadm/mdadm_detail_md0"
 sudo cat /proc/mdstat > "$BACKUP_DIR/mdadm/mdstat"
 cp /etc/fstab "$BACKUP_DIR/mdadm"
 sudo chown -R $USER "$BACKUP_DIR/mdadm"
-ssh $REMOTE_BACKUP "mkdir -p ~/tmp/reinstall"
-rsync -av --delete "$BACKUP_DIR/mdadm" $REMOTE_BACKUP:~/tmp/reinstall/
+ssh $REMOTE_BACKUP "mkdir -p ~/tmp/reinstall/$BACKUP_DIR"
+rsync -av --delete "$BACKUP_DIR/mdadm" $REMOTE_BACKUP:"~/tmp/reinstall/$BACKUP_DIR"
 
 ##one offs
 printf "\n\e[32mProcessing one offs\e[0m\n"
