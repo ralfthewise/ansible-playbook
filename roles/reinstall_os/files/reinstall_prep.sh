@@ -47,16 +47,25 @@ rsync -av --delete "$BACKUP_DIR/mdadm" $REMOTE_BACKUP:"~/tmp/reinstall/$BACKUP_D
 ##one offs
 printf "\n\e[32mProcessing one offs\e[0m\n"
 
-mkdir -p "$BACKUP_DIR/home/dev"
-cd ~/dev
-rsync -av git_tricks.txt doodlebug pg-renc "$BACKUP_DIR/home/dev"
-cd -
+echo "Do you wish to sync everything in ~/dev/?"
+select yn in "Yes" "No"; do
+  case $yn in
+    Yes)
+      mkdir -p "$BACKUP_DIR/home/dev"
+      rsync -av ~/dev/ "$BACKUP_DIR/home/dev"
+      break
+      ;;
+    No)
+      break
+      ;;
+  esac
+done
 
-mkdir -p "$BACKUP_DIR/home/dev/idexperts"
-cd ~/dev/idexperts
-rsync -av ansible.passwd ops-windows-dev radartools-aws-dev-2015 radartools-aws-dev.pem rdesktop.sh scp.sh ssh.sh "$BACKUP_DIR/home/dev/idexperts"
-cd -
+#mkdir -p "$BACKUP_DIR/home/dev/idexperts"
+#cd ~/dev/idexperts
+#rsync -av ansible.passwd ops-windows-dev radartools-aws-dev-2015 radartools-aws-dev.pem rdesktop.sh scp.sh ssh.sh "$BACKUP_DIR/home/dev/idexperts"
+#cd -
 
 rsync -av ~/VirtualBox\ VMs "$BACKUP_DIR/home/"
 
-printf "\n\e[31mDon't forget to examine ~/dev for things that need to be saved\e[0m\n"
+#printf "\n\e[31mDon't forget to examine ~/dev for things that need to be saved\e[0m\n"
