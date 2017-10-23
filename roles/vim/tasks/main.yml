@@ -31,6 +31,11 @@
   when: not vim.stat.exists
   shell: ln -s /usr/local/vim/bin/* /usr/local/bin
 
+- name: Install vi symbolic link
+  become: True
+  when: not vim.stat.exists
+  shell: ln -s /usr/local/vim/bin/vim /usr/local/bin/vi
+
 - name: Checkout vimconfig
   git: repo=git@github.com:ralfthewise/vimconfig.git dest=~/dev/vimconfig force=no update=no
 
