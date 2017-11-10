@@ -28,7 +28,7 @@
 
 - name: Add git-lfs repository
   become: True
-  apt_repository: repo='deb https://packagecloud.io/github/git-lfs/ubuntu/ trusty main' state=present update_cache=yes
+  apt_repository: repo='deb https://packagecloud.io/github/git-lfs/ubuntu/ {{git_lfs_distribution_release}} main' state=present update_cache=yes
 
 - name: Install git-lfs
   become: True

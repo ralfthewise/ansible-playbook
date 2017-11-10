@@ -5,8 +5,7 @@
 
 - name: docker apt repository
   become: True
-  #apt_repository: repo="deb https://apt.dockerproject.org/repo ubuntu-{{ansible_distribution_release}} main" state=present update_cache=yes
-  apt_repository: repo="deb https://apt.dockerproject.org/repo ubuntu-xenial main" state=present update_cache=yes
+  apt_repository: repo="deb https://apt.dockerproject.org/repo ubuntu-{{docker_distribution_release}} main" state=present update_cache=yes
 
 - name: make sure lxc-docker is not installed
   become: True

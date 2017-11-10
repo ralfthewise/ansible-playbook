@@ -22,8 +22,7 @@
 - name: virtualbox apt repository
   become: True
   when: not vbox.stat.exists
-  apt_repository: repo="deb http://download.virtualbox.org/virtualbox/debian zesty contrib" state=present update_cache=yes
-  #apt_repository: repo="deb http://download.virtualbox.org/virtualbox/debian {{ansible_distribution_release}} contrib" state=present update_cache=yes
+  apt_repository: repo="deb http://download.virtualbox.org/virtualbox/debian {{virtualbox_distribution_release}} contrib" state=present update_cache=yes
 
 - name: accept virtualbox extensions license
   become: True

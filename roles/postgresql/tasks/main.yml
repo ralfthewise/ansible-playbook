@@ -5,15 +5,15 @@
 
 - name: Postgresql apt repository
   become: True
-  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ utopic-pgdg main' state=present update_cache=yes
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ {{postgres_distribution_release}}-pgdg main' state=present update_cache=yes
 
 - name: Install postgresql
   become: True
-  apt: name={{item}} state=latest update_cache=yes cache_valid_time=600 default_release={{ ansible_distribution_release }}
+  apt: name={{item}} state=latest update_cache=yes cache_valid_time=600 default_release={{postgres_distribution_release}}
   with_items:
     - postgresql
     - libpq-dev
 
 - name: Install check-postgres
   become: True
-  apt: name=check-postgres state=latest update_cache=yes cache_valid_time=600 default_release=utopic-pgdg
+  apt: name=check-postgres state=latest update_cache=yes cache_valid_time=600 default_release={{postgres_distribution_release}}-pgdg

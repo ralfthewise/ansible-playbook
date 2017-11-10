@@ -17,7 +17,7 @@
     - {role: nodejs, tags: ['nodejs', 'node']}
     - {role: google-cloud-sdk, tags: ['google-cloud-sdk']}
     - {role: android, tags: ['android']}
-    - postgresql
+    - {role: postgresql, tags: ['postgresql', 'postgres']}
     - {role: vim, tags: ['vim']}
     - {role: docker, tags: ['docker']}
     - google_chrome

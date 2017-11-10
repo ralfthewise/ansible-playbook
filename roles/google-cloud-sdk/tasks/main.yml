@@ -5,7 +5,7 @@
 
 - name: Google cloud repository
   become: True
-  apt_repository: repo="deb https://packages.cloud.google.com/apt cloud-sdk-{{ansible_distribution_release}} main" state=present update_cache=yes
+  apt_repository: repo="deb https://packages.cloud.google.com/apt cloud-sdk-{{google_cloud_sdk_distribution_release}} main" state=present update_cache=yes
 
 - name: Install google-cloud-sdk
   become: True

@@ -1,3 +1,13 @@
 ---
 ansible_connection: local
 target_user: "{{ansible_user_id}}"
+
+#docker_distribution_release: "{{ansible_distribution_release}}"
+docker_distribution_release: xenial
+#virtualbox_distribution_release: "{{ansible_distribution_release}}"
+virtualbox_distribution_release: zesty
+google_cloud_sdk_distribution_release: "{{ansible_distribution_release}}"
+#postgres_distribution_release: "{{ansible_distribution_release}}"
+postgres_distribution_release: zesty
+#git_lfs_distribution_release: "{{ansible_distribution_release}}"
+git_lfs_distribution_release: trusty
