@@ -9,6 +9,7 @@
     - autofs
     - build-essential
     - aptitude
+    - dkms
     #- compton #compositing manager for lightweight desktops like openbox, xfce, etc.
     - cscope
     - curl
@@ -32,6 +33,7 @@
     - screen
     - silversearcher-ag #faster grep
     - software-properties-common
+    - gnome-tweak-tool
     - ssvnc
     - tofrodos
     - traceroute

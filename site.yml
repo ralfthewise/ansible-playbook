@@ -14,7 +14,7 @@
     - java
     - {role: golang, tags: ['go', 'golang']}
     - rvm
-    - {role: nodejs, tags: ['nodejs', 'node']}
+    #- {role: nodejs, tags: ['nodejs', 'node']}
     - {role: google-cloud-sdk, tags: ['google-cloud-sdk']}
     - {role: android, tags: ['android']}
     - postgresql
@@ -32,7 +32,7 @@
     - {role: xbindkeys, tags: ['xbindkeys']}
     #- {role: indicator-multiload, tags: ['indicator-multiload']}
     - {role: updf, tags: ['updf']}
-    - {role: yubikey, tags: ['yubikey']}
+    #- {role: yubikey, tags: ['yubikey']}
     - {role: remmina, tags: ['remmina']}
     - {role: seafile-client, tags: ['seafile-client']}
     - {role: generic_colorizer, tags: ['grc']}

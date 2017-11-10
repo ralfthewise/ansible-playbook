@@ -1,12 +1,13 @@
 #!/bin/bash
 
 EXT_UUID="$1"
-exit 0
+echo "Installing gnome shell extension $EXT_UUID"
 
 GNOME_SITE="https://extensions.gnome.org"
 GNOME_VERSION="$(gnome-shell --version | tr -cd "0-9." | cut -d'.' -f1,2)"
 EXTENSION_PATH="$HOME/.local/share/gnome-shell/extensions"
-INSTALLED_EXTENSIONS=( $(find /usr/share/gnome-shell/extensions $HOME/.local/share/gnome-shell/extensions -maxdepth 1 -type d -printf '%P\n') )
+mkdir -p "$EXTENSION_PATH"
+INSTALLED_EXTENSIONS=( $(find /usr/share/gnome-shell/extensions "$EXTENSION_PATH" -maxdepth 1 -type d -printf '%P\n') )
 
 if [[ " ${INSTALLED_EXTENSIONS[*]} " == *" $EXT_UUID "* ]]; then
   echo "Extension ${EXT_UUID} is already installed. Skipping."

@@ -1,8 +1,9 @@
 ---
 - script: "{{role_path}}/files/install_gnome_extension.sh {{item}}"
   with_items:
-    - TopIcons@phocean.net
+    - alternate-tab@gnome-shell-extensions.gcampax.github.com
     - system-monitor@paradoxxx.zero.gmail.com
+    #- TopIcons@phocean.net
 
 - name: Install system monitor dependencies
   become: True
@@ -12,7 +13,8 @@
     - gir1.2-networkmanager-1.0
     - gir1.2-clutter-1.0
 
-- shell: gsettings set org.gnome.shell enabled-extensions "['alternate-tab@gnome-shell-extensions.gcampax.github.com', 'TopIcons@phocean.net', 'system-monitor@paradoxxx.zero.gmail.com']"
+- shell: gsettings set org.gnome.shell enabled-extensions "['ubuntu-appindicators@ubuntu.com', 'ubuntu-dock@ubuntu.com', 'alternate-tab@gnome-shell-extensions.gcampax.github.com', 'system-monitor@paradoxxx.zero.gmail.com']"
+#- shell: gsettings set org.gnome.shell enabled-extensions "['ubuntu-appindicators@ubuntu.com', 'ubuntu-dock@ubuntu.com', 'alternate-tab@gnome-shell-extensions.gcampax.github.com', 'system-monitor@paradoxxx.zero.gmail.com', 'TopIcons@phocean.net']"
 
   # system monitor config
 - shell: dconf write /org/gnome/shell/extensions/system-monitor/cpu-graph-width 50
