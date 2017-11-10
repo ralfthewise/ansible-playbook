@@ -67,6 +67,10 @@
 - shell: dconf write /org/gtk/settings/file-chooser/show-hidden true
 - shell: dconf write /org/gnome/nautilus/preferences/default-folder-viewer '"list-view"'
 
+# custom ubuntu gnome configs
+- shell: dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed false
+- shell: dconf write /org/gnome/desktop/interface/clock-show-date true
+
 # unity configs
 #- shell: dconf write /com/canonical/indicator/power/show-percentage true
 #- shell: dconf write /desktop/unity/lenses/applications/display-available-apps false #don't show online results in dash
