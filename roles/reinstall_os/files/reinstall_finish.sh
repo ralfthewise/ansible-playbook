@@ -20,22 +20,19 @@ if [[ $(stat -c%s .bash_history) -ge $(stat -c%s ~/.bash_history) ]]; then
 else
   echo "${BOLD}Skipping .bash_history because existing file is larger than the backup${NORMAL}"
 fi
-rsync -av .ansible.cfg .psql_history .ssh bin tmp blog Documents Pictures Music Videos ~/
-rsync -av .config/VirtualBox/ ~/.config/VirtualBox/
+
+local BACKUP_ITEM
+for BACKUP_ITEM in .ansible.cfg .irb-history .pry_history .psql_history bin tmp blog Documents Pictures Music Videos; do
+  [ -e "$BACKUP_ITEM" ] && rsync -av "$BACKUP_ITEM" ~/
+done
+[ -e ".config/VirtualBox" ] && rsync -av .config/VirtualBox/ ~/.config/VirtualBox/
 cd -
 
 ##one offs
 printf "\n\e[32mProcessing one offs\e[0m\n"
 
 mkdir -p ~/dev
-cd "$BACKUP_DIR/home/dev"
-rsync -av git_tricks.txt doodlebug pg-renc ~/dev
-cd -
-
-mkdir -p ~/dev/idexperts
-cd "$BACKUP_DIR/home/dev/idexperts"
-rsync -av ansible.passwd ops-windows-dev radartools-aws-dev-2015 radartools-aws-dev.pem rdesktop.sh scp.sh ssh.sh ~/dev/idexperts
-cd -
+rsync -av "$BACKUP_DIR/home/dev/" ~/dev/
 
 rsync -av "$BACKUP_DIR/home/VirtualBox VMs" ~/
 
