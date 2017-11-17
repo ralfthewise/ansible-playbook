@@ -16,7 +16,7 @@
     - jq
     - exuberant-ctags
     - gimp
-    - keepass2
+    - keepassx
     - libc6:i386
     - libreoffice
     - libstdc++6:i386
