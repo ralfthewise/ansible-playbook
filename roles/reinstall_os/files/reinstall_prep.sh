@@ -13,6 +13,12 @@ BACKUP_DIR="$1"
 BACKUP_DIR="$(dirname "$BACKUP_DIR")/$(basename "$BACKUP_DIR")/"
 REMOTE_BACKUP="$2"
 
+# grab our term codes for pretty printing
+bold=$(tput bold)
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+reset=$(tput sgr0)
+
 run() {
   mkdir -p "$BACKUP_DIR"
 
@@ -28,7 +34,7 @@ run() {
   for BACKUP_ITEM in .ansible.cfg .bash_history .bash_logout .bashrc .gconf .gitconfig .irb-history .local .profile .pry_history .psql_history .ssh .VirtualBox .vnc bin tmp blog Documents Pictures Music Videos; do
     [ -e "$BACKUP_ITEM" ] && rsync -av --delete "$BACKUP_ITEM" "$BACKUP_DIR/home/"
   done
-  rsync -av --delete --exclude .config/google-chrome .config "$BACKUP_DIR/home/"
+  rsync -av --delete --exclude .config/google-chrome --exclude .config/radar-deploy .config "$BACKUP_DIR/home/"
   dconf dump / > "$BACKUP_DIR/home/current-dconf.dump"
 
   #/etc
@@ -41,25 +47,29 @@ run() {
   sudo rsync -av /root/.bash_history "$BACKUP_DIR/root"
 
   #mdadm
-  printf "\n\e[32mProcessing mdadm\e[0m\n"
-  mkdir -p "$BACKUP_DIR/mdadm"
-  sudo mdadm --detail --scan > "$BACKUP_DIR/mdadm/mdadm_detail_scan"
-  sudo mdadm --detail /dev/md0 > "$BACKUP_DIR/mdadm/mdadm_detail_md0"
-  sudo cat /proc/mdstat > "$BACKUP_DIR/mdadm/mdstat"
-  cp /etc/fstab "$BACKUP_DIR/mdadm"
-  sudo chown -R $USER "$BACKUP_DIR/mdadm"
-  ssh $REMOTE_BACKUP "mkdir -p ~/tmp/reinstall/$BACKUP_DIR"
-  rsync -av --delete "$BACKUP_DIR/mdadm" $REMOTE_BACKUP:"~/tmp/reinstall/$BACKUP_DIR"
+  if [ -x "$(command -v mdadm)" ]; then
+    printf "\n\e[32mProcessing mdadm\e[0m\n"
+    mkdir -p "$BACKUP_DIR/mdadm"
+    sudo mdadm --detail --scan > "$BACKUP_DIR/mdadm/mdadm_detail_scan"
+    sudo mdadm --detail /dev/md0 > "$BACKUP_DIR/mdadm/mdadm_detail_md0"
+    sudo cat /proc/mdstat > "$BACKUP_DIR/mdadm/mdstat"
+    cp /etc/fstab "$BACKUP_DIR/mdadm"
+    sudo chown -R $USER "$BACKUP_DIR/mdadm"
+    ssh $REMOTE_BACKUP "mkdir -p ~/tmp/reinstall/$BACKUP_DIR"
+    rsync -av --delete "$BACKUP_DIR/mdadm" $REMOTE_BACKUP:"~/tmp/reinstall/$BACKUP_DIR"
+  fi
 
   ##one offs
   printf "\n\e[32mProcessing one offs\e[0m\n"
 
   mkdir -p "$BACKUP_DIR/home/dev"
   dlg --visit-items --keep-tite --no-cancel --no-items --separate-output --checklist "What do you wish to sync in ~/dev?" 0 0 0 $(ls -p ~/dev | sed 's/$/ off/') | while read DEV_ITEM; do
-    rsync -av --delete --exclude '*node_modules/' --exclude '*vendor/' ~/dev/"$DEV_ITEM" "$BACKUP_DIR/home/dev/$DEV_ITEM"
+    rsync -av --delete --exclude '*node_modules/' --exclude '*vendor/' --exclude '*venv/' ~/dev/"$DEV_ITEM" "$BACKUP_DIR/home/dev/$DEV_ITEM"
   done
 
   rsync -av ~/VirtualBox\ VMs "$BACKUP_DIR/home/"
+
+  printf "\n${bold}Don't forget to save browser tabs${reset}\n"
 }
 
 dlg() {
