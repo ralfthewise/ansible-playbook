@@ -8,6 +8,7 @@
     - lame #needed to asunder to rip to mp3
     - autofs
     - build-essential
+    - net-tools
     - aptitude
     - dkms
     #- compton #compositing manager for lightweight desktops like openbox, xfce, etc.
@@ -49,6 +50,7 @@
     - bombono-dvd #DVD creator
     - pavucontrol #PulseAudio Volume Control
     - solaar #manage Logitech wireless devices
+    - chrome-gnome-shell
     #also need https://git.lekensteyn.nl/ltunify/
     #also included at some point but no longer use
     #- clipit #view clipboard history
