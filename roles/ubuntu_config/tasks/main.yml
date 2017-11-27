@@ -45,6 +45,7 @@
 #- shell: dconf write /org/gnome/terminal/legacy/keybindings/help '"disabled"'
 
 - shell: dconf write /org/gnome/shell/overrides/workspaces-only-on-primary false
+- shell: dconf write /org/gnome/mutter/workspaces-only-on-primary false
 
 - shell: dconf write /org/gnome/desktop/wm/keybindings/toggle-maximized '["<Alt>F10"]'
 - shell: dconf write /org/gnome/desktop/wm/keybindings/maximize '[""]' #defaults to <Super>Up
@@ -70,6 +71,7 @@
 # custom ubuntu gnome configs
 - shell: dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed false
 - shell: dconf write /org/gnome/desktop/interface/clock-show-date true
+- shell: dconf write /org/gnome/desktop/interface/show-battery-percentage true
 
 # unity configs
 #- shell: dconf write /com/canonical/indicator/power/show-percentage true
