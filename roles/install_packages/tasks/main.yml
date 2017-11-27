@@ -9,6 +9,7 @@
     - autofs
     - build-essential
     - net-tools
+    - nmap
     - aptitude
     - dkms
     #- compton #compositing manager for lightweight desktops like openbox, xfce, etc.
