@@ -32,5 +32,6 @@
   shell: npm install -g {{item}}
   with_items:
     - npm
-    - coffee-script
+    - coffeescript #v2.X
     - coffeelint
+    #- coffee-script #v1.X
