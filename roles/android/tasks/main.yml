@@ -25,4 +25,7 @@
   lineinfile: dest=~/.bashrc line='export ANDROID_HOME=~/Android/Sdk'
 
 - name: Add appropriate paths
-  lineinfile: dest=~/.bashrc line='export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools'
+  lineinfile: dest=~/.bashrc line='export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin'
+
+- name: Force emulator to use system libs (https://issuetracker.google.com/issues/37075150)
+  lineinfile: dest=~/.profile line='export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1'
