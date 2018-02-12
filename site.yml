@@ -11,7 +11,7 @@
     - {role: sysctl, tags: ['sysctl']}
     - {role: install_packages, tags: ['packages']}
     - {role: git, tags: ['git']}
-    - java
+    - {role: java, tags: ['java']}
     - {role: golang, tags: ['go', 'golang']}
     - {role: rvm, tags: ['rvm']}
     - {role: nodejs, tags: ['nodejs', 'node']}

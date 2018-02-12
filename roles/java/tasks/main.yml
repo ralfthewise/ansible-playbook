@@ -29,3 +29,32 @@
 - name: Install java 8
   become: True
   apt: name=oracle-java8-installer state=latest
+
+- name: Apache Portable Runtime Library
+  become: yes
+  apt: name=libapr1-dev state=latest
+
+- name: check gradle
+  command: which gradle
+  environment:
+    PATH: /opt/gradle/bin
+  ignore_errors: yes
+  register: gradle_check
+
+- name: download gradle
+  when: gradle_check.rc != 0
+  get_url:
+    url: https://services.gradle.org/distributions/gradle-{{gradle_version}}-bin.zip
+    dest: /tmp/gradle-bin.zip
+
+- name: unpack gradle
+  become: yes
+  when: gradle_check.rc != 0
+  unarchive: src=/tmp/gradle-bin.zip dest=/opt remote_src=yes
+
+- name: link gradle
+  become: yes
+  file:
+    src: /opt/gradle-{{gradle_version}}
+    dest: /opt/gradle
+    state: link
