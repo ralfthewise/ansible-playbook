@@ -15,7 +15,7 @@
 
 - name: Configure vim source
   when: not vim.stat.exists
-  shell: ./configure --prefix=/usr/local/vim --enable-pythoninterp=yes --enable-multibyte=yes --enable-cscope=yes --enable-rubyinterp=yes chdir=~/dev/vim
+  shell: ./configure --prefix=/usr/local/vim --enable-pythoninterp=yes --enable-python3interp=yes --enable-multibyte=yes --enable-cscope=yes --enable-rubyinterp=yes --with-ruby-command=/usr/local/rvm/rubies/default/bin/ruby chdir=~/dev/vim
 
 - name: Compile vim source
   when: not vim.stat.exists
