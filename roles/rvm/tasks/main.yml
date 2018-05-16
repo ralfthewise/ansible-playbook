@@ -21,10 +21,10 @@
   when: not rvm.stat.exists
   shell: bash -l -c 'rvm requirements'
 
-- name: Install ruby 2.4
+- name: Install ruby 2.5.1
   become: True
   when: not rvm.stat.exists
-  shell: bash -l -c 'rvm install 2.4'
+  shell: bash -l -c 'rvm install 2.5.1'
 
 - name: Install ruby ldconfig conf
   become: True
