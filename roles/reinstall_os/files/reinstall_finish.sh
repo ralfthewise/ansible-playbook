@@ -22,10 +22,14 @@ else
 fi
 
 local BACKUP_ITEM
-for BACKUP_ITEM in .ansible.cfg .irb-history .pry_history .psql_history bin tmp blog Documents Pictures Music Videos; do
+# files
+for BACKUP_ITEM in .ansible.cfg .irb-history .pry_history .psql_history; do
   [ -e "$BACKUP_ITEM" ] && rsync -av "$BACKUP_ITEM" ~/
 done
-[ -e ".config/VirtualBox" ] && rsync -av .config/VirtualBox/ ~/.config/VirtualBox/
+# directories
+for BACKUP_ITEM in bin tmp blog Documents Pictures Music Videos .local/share/keyrings .config/VirtualBox .config/remmina .local/share/remmina; do
+  [ -e "$BACKUP_ITEM" ] && rsync -av "$BACKUP_ITEM/" ~/"$BACKUP_ITEM/"
+done
 cd -
 
 ##one offs
