@@ -24,7 +24,6 @@ run() {
 
   ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
   cd "${ROOT}"
-  rsync -av $0 ~/bin/reinstall_finish.sh "$BACKUP_DIR"
 
   #home folder
   printf "\n\e[32mProcessing home folder\e[0m\n"
