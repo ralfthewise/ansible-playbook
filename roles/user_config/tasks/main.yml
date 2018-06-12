@@ -23,11 +23,16 @@
     regexp: 'export PROMPT_COMMAND=.*$'
     line: 'export PROMPT_COMMAND="history -a" #flush history after every command'
 
-- name: Create goenv alias
+- name: Create goenv function
   lineinfile:
     dest: ~/.bashrc
-    regexp: ^alias goenv=.*
-    line: alias goenv='TMPGOPATH="$(while [[ $PWD != "/" && ${PWD##*/} != "src" ]]; do cd ..; done && cd .. && pwd)" && env GOPATH="$TMPGOPATH" PATH=$PATH:"$TMPGOPATH/bin"'
+    regexp: ^goenv.*
+    line: goenv() { TMPGOPATH="$(while [[ $PWD != "/" && ${PWD##*/} != "src" ]]; do cd ..; done && cd .. && pwd)"; GOPATH="$TMPGOPATH" PATH=$PATH:"$TMPGOPATH/bin" "$@"; }
+
+- name: Create goenv completion
+  lineinfile:
+    dest: ~/.bashrc
+    line: complete -F _command goenv
 
 # Not sure this is actually necessary
 - name: Export HISTFILESIZE HISTSIZE HISTTIMEFORMAT
