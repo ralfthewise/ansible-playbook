@@ -5,6 +5,7 @@ pushd "${ROOT}" &> /dev/null
 
 #first make sure ansible is installed
 ./install_ansible.sh
+source venv/bin/activate
 
 #configure what will be installed via ansible
 ANSIBLE_HOST="localhost"
