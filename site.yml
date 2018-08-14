@@ -27,6 +27,7 @@
     - {role: ubuntu_config, tags: ['ubuntu_config']}
     - {role: virtualbox, tags: ['virtualbox']}
     - {role: vagrant, tags: ['vagrant']}
+    - {role: terraform, tags: ['terraform']}
     - mkusb #better usb startup disk creator: https://help.ubuntu.com/community/mkusb
     - {role: caffeine, tags: ['caffeine']}
     - {role: xbindkeys, tags: ['xbindkeys']}

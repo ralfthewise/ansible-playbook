@@ -1,0 +1,28 @@
+---
+- shell: terraform --version | sed 's/[^0-9\.]*//g'
+  ignore_errors: True
+  register: terraform_installed_version
+
+- shell: curl -s https://releases.hashicorp.com/terraform/index.json | jq --raw-output '.versions | to_entries | [ .[] | select(.key | test("^[\\d\\.]*$")) ] | sort_by(.key | split(".") | map(tonumber)) | last | .value.builds | .[] | select(.arch=="amd64") | select(.os=="linux") | .version'
+  register: terraform_version
+
+- shell: curl -s https://releases.hashicorp.com/terraform/index.json | jq --raw-output '.versions | to_entries | [ .[] | select(.key | test("^[\\d\\.]*$")) ] | sort_by(.key | split(".") | map(tonumber)) | last | .value.builds | .[] | select(.arch=="amd64") | select(.os=="linux") | .url'
+  when: 'terraform_version.stdout not in terraform_installed_version.stdout'
+  register: terraform_url
+
+- name: Download terraform
+  when: 'terraform_version.stdout not in terraform_installed_version.stdout'
+  get_url:
+    url: "{{terraform_url.stdout}}"
+    dest: /tmp/terraform.zip
+
+- name: Unzip terraform
+  become: True
+  when: 'terraform_version.stdout not in terraform_installed_version.stdout'
+  unarchive:
+    src: /tmp/terraform.zip
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root
