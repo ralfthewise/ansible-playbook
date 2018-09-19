@@ -44,6 +44,9 @@
 - name: Add git doglog
   shell: git config --global alias.doglog "log --graph --pretty=format:'%h -%C(yellow)%d%Creset %C(bold white)%s%Creset %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=iso"
 
+- name: Add git pr
+  shell: git config --global alias.pr '!xdg-open "$(git remote -v | grep origin | grep push | cut -f 2 | cut -d " " -f 1 | sed -e "s|git@\(.*\):\(.*\).git|https://\1/\2|")/pull/new/$(git rev-parse --abbrev-ref HEAD)"'
+
 - name: Set show dirty state
   lineinfile:
     dest: ~/.bashrc
