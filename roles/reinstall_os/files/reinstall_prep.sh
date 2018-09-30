@@ -63,7 +63,7 @@ run() {
 
   mkdir -p "$BACKUP_DIR/home/dev"
   dlg --visit-items --keep-tite --no-cancel --no-items --separate-output --checklist "What do you wish to sync in ~/dev?" 0 0 0 $(ls -p ~/dev | sed 's/$/ off/') | while read DEV_ITEM; do
-    rsync -av --delete --exclude '*node_modules/' --exclude '*vendor/' --exclude '*venv/' ~/dev/"$DEV_ITEM" "$BACKUP_DIR/home/dev/$DEV_ITEM"
+    rsync -av --delete --exclude '*node_modules/' --exclude '*vendor/' --exclude '*venv/' --exclude '*.terraform/' ~/dev/"$DEV_ITEM" "$BACKUP_DIR/home/dev/$DEV_ITEM"
   done
 
   rsync -av ~/VirtualBox\ VMs "$BACKUP_DIR/home/"
