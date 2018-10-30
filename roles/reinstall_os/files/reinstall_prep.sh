@@ -33,7 +33,7 @@ run() {
   for BACKUP_ITEM in .ansible.cfg .bash_history .bash_logout .bashrc .gconf .gitconfig .irb-history .local .profile .pry_history .psql_history .ssh .VirtualBox .vnc bin tmp blog Documents Pictures Music Videos; do
     [ -e "$BACKUP_ITEM" ] && rsync -av --delete "$BACKUP_ITEM" "$BACKUP_DIR/home/"
   done
-  rsync -av --delete --exclude .config/google-chrome --exclude .config/radar-deploy .config "$BACKUP_DIR/home/"
+  rsync -av --delete --exclude .config/google-chrome --exclude .config/radar-deploy --exclude .config/yarn .config "$BACKUP_DIR/home/"
   dconf dump / > "$BACKUP_DIR/home/current-dconf.dump"
 
   #/etc
