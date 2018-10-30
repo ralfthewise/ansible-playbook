@@ -1,5 +1,5 @@
 ---
-- shell: terraform --version | sed 's/[^0-9\.]*//g'
+- shell: terraform --version | sed 's/[^0-9\.]*//g' | head -n 1
   ignore_errors: True
   register: terraform_installed_version
 
