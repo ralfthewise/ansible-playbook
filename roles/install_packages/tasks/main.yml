@@ -18,7 +18,7 @@
     - jq
     - exuberant-ctags
     - gimp
-    - keepassx
+    #- keepassx
     - libc6:i386
     - libreoffice
     - libstdc++6:i386
@@ -53,6 +53,9 @@
     - solaar #manage Logitech wireless devices
     - chrome-gnome-shell
     - gconf-editor
+    - pwgen
+    - xmlsec1
+    - vlc
     #also need https://git.lekensteyn.nl/ltunify/
     #also included at some point but no longer use
     #- clipit #view clipboard history
