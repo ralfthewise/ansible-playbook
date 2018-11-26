@@ -55,6 +55,7 @@
     - gconf-editor
     - pwgen
     - xmlsec1
+    - libxml2-dev
     - vlc
     #also need https://git.lekensteyn.nl/ltunify/
     #also included at some point but no longer use
