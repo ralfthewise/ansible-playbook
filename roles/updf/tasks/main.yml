@@ -33,7 +33,7 @@
   with_items:
     - gir1.2-poppler-0.18
     - gir1.2-rsvg-2.0
-    - python-imaging
+    - python-pil
     - python-numpy
     - python-pil
     - python-gi
@@ -44,7 +44,7 @@
   when: not updf.stat.exists
   shell: |
     curl -o /tmp/updf_0.0.2.4-1ubuntu1_all.deb http://ppa.launchpad.net/atareao/updf/ubuntu/pool/main/u/updf/updf_0.0.2.4-1ubuntu1_all.deb &&
-    dpkg -i /tmp/updf_0.0.2.4-1ubuntu1_all.deb &&
+    dpkg --ignore-depends=python-imaging -i /tmp/updf_0.0.2.4-1ubuntu1_all.deb &&
     rm -f /tmp/updf_0.0.2.4-1ubuntu1_all.deb
 
 - name: Fix updf toolbar 1

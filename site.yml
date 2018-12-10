@@ -38,7 +38,7 @@
     - {role: generic_colorizer, tags: ['grc']}
     #- {role: autofs_client, tags: ['autofs_client']}
     - {role: reinstall_os, tags: ['reinstall_os']}
-    #- {role: updf, tags: ['updf']}
+    - {role: updf, tags: ['updf']}
 
 - name: Ping hosts
   hosts: ping
