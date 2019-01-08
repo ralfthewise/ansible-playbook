@@ -41,11 +41,7 @@
 
 - name: Install updf
   become: True
-  when: not updf.stat.exists
-  shell: |
-    curl -o /tmp/updf_0.0.2.4-1ubuntu1_all.deb http://ppa.launchpad.net/atareao/updf/ubuntu/pool/main/u/updf/updf_0.0.2.4-1ubuntu1_all.deb &&
-    dpkg --ignore-depends=python-imaging -i /tmp/updf_0.0.2.4-1ubuntu1_all.deb &&
-    rm -f /tmp/updf_0.0.2.4-1ubuntu1_all.deb
+  apt: deb=roles/updf/files/updf_0.0.2.4_all.deb
 
 - name: Fix updf toolbar 1
   become: True
