@@ -9,10 +9,11 @@
 
 - name: Install postgresql
   become: True
-  apt: name={{item}} state=latest update_cache=yes cache_valid_time=600
-  with_items:
-    - postgresql
-    - libpq-dev
+  apt: name=postgresql-{{postgresql_version}} default_release=zesty-pgdg state=latest update_cache=yes cache_valid_time=600
+
+- name: Install libpq-dev
+  become: True
+  apt: name=libpq-dev state=latest update_cache=yes cache_valid_time=600
 
 - name: Install check-postgres
   become: True
