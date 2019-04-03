@@ -1,0 +1,28 @@
+---
+- shell: packer --version
+  ignore_errors: True
+  register: packer_installed_version
+
+- shell: curl -s https://releases.hashicorp.com/packer/index.json | jq --raw-output '.versions | to_entries | max_by(.key) | .value.builds | .[] | select(.arch=="amd64") | select(.os=="linux") | .version'
+  register: packer_version
+
+- shell: curl -s https://releases.hashicorp.com/packer/index.json | jq --raw-output '.versions | to_entries | max_by(.key) | .value.builds | .[] | select(.arch=="amd64") | select(.os=="linux") | .url'
+  when: 'packer_version.stdout not in packer_installed_version.stdout'
+  register: packer_url
+
+- name: Download packer zip
+  when: 'packer_version.stdout not in packer_installed_version.stdout'
+  get_url:
+    url: "{{packer_url.stdout}}"
+    dest: /tmp/packer.zip
+
+- name: Unzip packer
+  become: True
+  when: 'packer_version.stdout not in packer_installed_version.stdout'
+  unarchive:
+    src: /tmp/packer.zip
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root
