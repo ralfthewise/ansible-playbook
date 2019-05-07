@@ -7,7 +7,7 @@ docker_distribution_release: xenial
 #virtualbox_distribution_release: "{{ansible_distribution_release}}"
 virtualbox_distribution_release: bionic
 google_cloud_sdk_distribution_release: "{{ansible_distribution_release}}"
-#postgres_distribution_release: "{{ansible_distribution_release}}"
-postgres_distribution_release: zesty
+#postgres_distribution_release: zesty
+postgres_distribution_release: "{{ansible_distribution_release}}"
 #git_lfs_distribution_release: "{{ansible_distribution_release}}"
 git_lfs_distribution_release: trusty
