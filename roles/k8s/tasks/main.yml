@@ -1,0 +1,27 @@
+---
+- name: Google cloud apt repository key
+  become: True
+  apt_key: url='https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+
+- name: Kubernetes repository
+  become: True
+  apt_repository: repo="deb https://apt.kubernetes.io/ kubernetes-{{kubernetes_distribution_release}} main" state=present update_cache=yes
+
+- name: Install kubectl
+  become: True
+  apt: name=kubectl state=latest
+
+- shell: dpkg-query --showformat='${Version}' --show minikube
+  ignore_errors: True
+  register: minikube_installed_version
+
+- name: Download minikube deb
+  when: minikube_version != minikube_installed_version.stdout
+  get_url:
+    url: https://storage.googleapis.com/minikube/releases/latest/minikube_{{minikube_version}}.deb
+    dest: /tmp/minikube.deb
+
+- name: Install minikube deb
+  become: True
+  when: minikube_version != minikube_installed_version.stdout
+  apt: deb=/tmp/minikube.deb force=True

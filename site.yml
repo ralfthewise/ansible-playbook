@@ -20,6 +20,7 @@
     - {role: postgresql, tags: ['postgresql', 'postgres']}
     - {role: vim, tags: ['vim']}
     - {role: docker, tags: ['docker']}
+    - {role: k8s, tags: ['k8s', 'kubernetes']}
     - google_chrome
     #- hipchat
     - {role: user_config, tags: ['user_config']}
