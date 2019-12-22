@@ -25,3 +25,37 @@
   become: True
   when: minikube_version != minikube_installed_version.stdout
   apt: deb=/tmp/minikube.deb force=True
+
+- shell: helm version | sed 's/.*v\([0-9\.]\+\).*/\1/g'
+  ignore_errors: True
+  register: helm_installed_version
+
+- name: Download helm
+  when: helm_version != helm_installed_version.stdout
+  get_url:
+    url: "https://get.helm.sh/helm-v{{helm_version}}-linux-amd64.tar.gz"
+    dest: /tmp/helm.tar.gz
+
+- name: Temp dir for helm
+  when: helm_version != helm_installed_version.stdout
+  file:
+    path: /tmp/helm
+    state: directory
+
+- name: Unpack helm
+  when: helm_version != helm_installed_version.stdout
+  unarchive:
+    src: /tmp/helm.tar.gz
+    dest: /tmp/helm
+    remote_src: yes
+
+- name: Copy helm to /usr/local/bin
+  become: True
+  when: helm_version != helm_installed_version.stdout
+  copy:
+    src: /tmp/helm/linux-amd64/helm
+    dest: /usr/local/bin/helm
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root

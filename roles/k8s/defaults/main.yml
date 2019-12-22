@@ -2,3 +2,4 @@
 #kubernetes_distribution_release: "{{ansible_distribution_release}}"
 kubernetes_distribution_release: xenial
 minikube_version: '1.5.2'
+helm_version: '3.0.2'
