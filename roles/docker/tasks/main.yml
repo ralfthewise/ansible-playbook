@@ -1,19 +1,19 @@
 ---
 - name: docker apt repository key
   become: True
-  apt_key: keyserver='hkp://keyserver.ubuntu.com:80' id=58118E89F3A912897C070ADBF76221572C52609D
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 - name: docker apt repository
   become: True
-  apt_repository: repo="deb https://apt.dockerproject.org/repo ubuntu-{{docker_distribution_release}} main" state=present update_cache=yes
-
-- name: make sure lxc-docker is not installed
-  become: True
-  apt: name=lxc-docker state=absent update_cache=yes cache_valid_time=600 purge=yes
+  apt_repository: repo="deb [arch=amd64] https://download.docker.com/linux/ubuntu {{docker_distribution_release}} stable" state=present update_cache=yes
 
 - name: install docker-engine
   become: True
-  apt: name=docker-engine state=latest update_cache=yes cache_valid_time=600
+  apt: name={{item}} state=latest update_cache=yes cache_valid_time=600
+  with_items:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
 
 - name: Add current user to docker group
   become: True
