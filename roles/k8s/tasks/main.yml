@@ -67,3 +67,7 @@
     mode: 0755
     owner: root
     group: root
+
+- name: Install tilt
+  become: True
+  shell: curl -fsSL https://github.com/windmilleng/tilt/releases/download/v{{tilt_version}}/tilt.{{tilt_version}}.linux.x86_64.tar.gz | tar -xzv tilt && mv tilt /usr/local/bin/tilt
