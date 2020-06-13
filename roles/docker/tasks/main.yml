@@ -19,20 +19,32 @@
   become: True
   user: name={{ansible_user_id}} groups=docker append=yes
 
+- shell: docker-compose version --short
+  ignore_errors: True
+  register: docker_compose_installed_version
+
 - name: Install docker-compose
   become: True
-  pip: name=docker-compose state=latest
+  when: docker_compose_version != docker_compose_installed_version.stdout
+  shell: curl -L "https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 
 - name: Install docker-compose bash completions
   become: True
+  when: docker_compose_version != docker_compose_installed_version.stdout
   shell: curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
+- shell: docker-machine --version | sed 's/.*version \([0-9\.]\+\).*/\1/g'
+  ignore_errors: True
+  register: docker_machine_installed_version
 
 - name: Install docker-machine
   become: True
-  shell: curl -L https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && chmod +x /tmp/docker-machine && cp /tmp/docker-machine /usr/local/bin/docker-machine
+  when: docker_machine_version != docker_machine_installed_version.stdout
+  shell: curl -L https://github.com/docker/machine/releases/download/v{{docker_machine_version}}/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine && chmod +x /tmp/docker-machine && cp /tmp/docker-machine /usr/local/bin/docker-machine
 
 - name: Install docker-machine bash completions
   become: True
+  when: docker_machine_version != docker_machine_installed_version.stdout
   get_url: dest=/etc/bash_completion.d url=https://raw.githubusercontent.com/docker/machine/master/contrib/completion/bash/docker-machine.bash mode=644
 
 #- name: install pip

@@ -1,0 +1,3 @@
+---
+docker_compose_version: '1.26.0'
+docker_machine_version: '0.10.0'
