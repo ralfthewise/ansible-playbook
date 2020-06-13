@@ -68,6 +68,20 @@
     owner: root
     group: root
 
+- shell: skaffold version | sed 's/.*v\([0-9\.]\+\).*/\1/g'
+  ignore_errors: True
+  register: skaffold_installed_version
+
+- name: Install skaffold
+  become: True
+  when: skaffold_version != skaffold_installed_version.stdout
+  shell: curl -Lo /tmp/skaffold https://storage.googleapis.com/skaffold/releases/v{{skaffold_version}}/skaffold-linux-amd64 && chmod +x /tmp/skaffold && mv /tmp/skaffold /usr/local/bin
+
+- shell: tilt version | sed 's/.*v\([0-9\.]\+\).*/\1/g'
+  ignore_errors: True
+  register: tilt_installed_version
+
 - name: Install tilt
   become: True
+  when: tilt_version != tilt_installed_version.stdout
   shell: curl -fsSL https://github.com/windmilleng/tilt/releases/download/v{{tilt_version}}/tilt.{{tilt_version}}.linux.x86_64.tar.gz | tar -xzv tilt && mv tilt /usr/local/bin/tilt

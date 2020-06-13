@@ -3,4 +3,5 @@
 kubernetes_distribution_release: xenial
 minikube_version: '1.5.2'
 helm_version: '3.0.2'
+skaffold_version: '1.10.1'
 tilt_version: '0.13.4'
