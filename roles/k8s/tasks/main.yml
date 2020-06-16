@@ -11,27 +11,23 @@
   become: True
   apt: name=kubectl state=latest
 
-- name: Install minikube bash completions
+- name: Install kubectl bash completions
   become: True
   shell: kubectl completion bash > /etc/bash_completion.d/kubectl
 
-- shell: dpkg-query --showformat='${Version}' --show minikube
+- shell: minikube version | head -n 1 | sed 's/.*v\([0-9\.]\+\).*/\1/g'
+  #shell: dpkg-query --showformat='${Version}' --show minikube
   ignore_errors: True
   register: minikube_installed_version
 
-- name: Download minikube deb
-  when: minikube_version != minikube_installed_version.stdout
-  get_url:
-    url: https://storage.googleapis.com/minikube/releases/latest/minikube_{{minikube_version}}.deb
-    dest: /tmp/minikube.deb
-
-- name: Install minikube deb
+- name: Install minikube
   become: True
   when: minikube_version != minikube_installed_version.stdout
-  apt: deb=/tmp/minikube.deb force=True
+  shell: curl -Lo /tmp/minikube https://github.com/kubernetes/minikube/releases/download/v{{minikube_version}}/minikube-linux-amd64 && chmod +x /tmp/minikube && mv /tmp/minikube /usr/local/bin
 
 - name: Install minikube bash completions
   become: True
+  when: minikube_version != minikube_installed_version.stdout
   shell: minikube completion bash > /etc/bash_completion.d/minikube
 
 - shell: helm version | sed 's/.*v\([0-9\.]\+\).*/\1/g'

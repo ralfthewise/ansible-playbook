@@ -1,7 +1,7 @@
 ---
 #kubernetes_distribution_release: "{{ansible_distribution_release}}"
 kubernetes_distribution_release: xenial
-minikube_version: '1.5.2'
+minikube_version: '1.11.0'
 helm_version: '3.0.2'
 skaffold_version: '1.11.0'
 tilt_version: '0.13.4'
