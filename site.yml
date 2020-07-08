@@ -13,7 +13,8 @@
     - {role: git, tags: ['git']}
     - {role: java, tags: ['java']}
     - {role: golang, tags: ['go', 'golang']}
-    - {role: rvm, tags: ['rvm']}
+    # - {role: rvm, tags: ['rvm']}
+    - {role: rbenv, tags: ['rbenv']}
     - {role: nodejs, tags: ['nodejs', 'node']}
     - {role: google-cloud-sdk, tags: ['google-cloud-sdk']}
     - {role: android, tags: ['android']}
