@@ -20,3 +20,7 @@
   become: True
   when: not rbenv.stat.exists
   shell: bash -l -c 'rbenv install {{ruby_version}}'
+
+- name: Install updated bundler
+  become: True
+  shell: bash -l -c 'gem install bundler'
