@@ -81,3 +81,7 @@
   become: True
   when: tilt_version != tilt_installed_version.stdout
   shell: curl -fsSL https://github.com/windmilleng/tilt/releases/download/v{{tilt_version}}/tilt.{{tilt_version}}.linux.x86_64.tar.gz | tar -xzv tilt && mv tilt /usr/local/bin/tilt
+
+- name: Install devspace bash completions
+  become: True
+  shell: curl -Lo /etc/bash_completion.d/devspace https://raw.githubusercontent.com/loft-sh/devspace/master/completion/bash.sh
