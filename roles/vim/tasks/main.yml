@@ -16,8 +16,8 @@
 - name: Configure vim source
   when: not vim.stat.exists
   shell: |
-    RUBY_VERSION=`cat $(rbenv root)/version`
-    LDFLAGS='-L/usr/local/rbenv/versions/$RUBY_VERSION/lib' ./configure --prefix=/usr/local/vim --enable-pythoninterp=yes --enable-python3interp=yes --enable-multibyte=yes --enable-cscope=yes --enable-rubyinterp=yes --with-ruby-command=/usr/local/rbenv/shims/ruby chdir=~/dev/vim
+    RUBY_VERSION=`rbenv global`
+    LDFLAGS="-L/usr/local/rbenv/versions/$RUBY_VERSION/lib" ./configure --prefix=/usr/local/vim --enable-pythoninterp=yes --enable-python3interp=yes --enable-multibyte=yes --enable-cscope=yes --enable-rubyinterp=yes --with-ruby-command=/usr/local/rbenv/shims/ruby chdir=~/dev/vim
 
 - name: Compile vim source
   when: not vim.stat.exists
