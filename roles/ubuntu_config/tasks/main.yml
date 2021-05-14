@@ -73,6 +73,17 @@
 - shell: dconf write /org/gnome/desktop/interface/clock-show-date true
 - shell: dconf write /org/gnome/desktop/interface/show-battery-percentage true
 
+# custom print scr
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings '["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/", "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"]'
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/screenshot "''"
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name '"Screenshot Dialog"'
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command '"flameshot gui"'
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding '"Print"'
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/screenshot-clip "''"
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name '"Screenshot Full"'
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command '"flameshot full -c -p /tmp"'
+- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding '"<Control>Print"'
+
 # unity configs
 #- shell: dconf write /com/canonical/indicator/power/show-percentage true
 #- shell: dconf write /desktop/unity/lenses/applications/display-available-apps false #don't show online results in dash

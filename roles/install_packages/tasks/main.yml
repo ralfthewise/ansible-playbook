@@ -57,6 +57,7 @@
     - xmlsec1
     - libxml2-dev
     - vlc
+    - flameshot
     #also need https://git.lekensteyn.nl/ltunify/
     #also included at some point but no longer use
     #- clipit #view clipboard history
