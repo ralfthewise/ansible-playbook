@@ -1,3 +1,4 @@
 ---
 dependencies:
+  - {role: 'apt_config'}
   - {role: 'rbenv'}
