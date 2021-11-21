@@ -10,7 +10,7 @@
     export PATH=$RBENV_ROOT/bin:$PATH
     mkdir /usr/local/rbenv
     ln -sfn /usr/local/rbenv /root/.rbenv
-    curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
+    curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
     rbenv init -
 
 - name: Install system rbenv profile
