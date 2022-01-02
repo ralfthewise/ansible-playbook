@@ -35,6 +35,10 @@
     - virtualbox-5.2
     #- virtualbox-ext-pack #isn't from the virtualbox repo, so causes issues
 
+- name: Add current user to vboxusers group
+  become: True
+  user: name={{ansible_user_id}} groups=vboxusers append=yes
+
 - name: Add keyfile section to NetworkManager.conf
   become: True
   lineinfile:
