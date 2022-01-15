@@ -4,60 +4,61 @@
   apt: name={{item}} state=latest
   with_items:
     - apt-transport-https
-    - asunder #music CD ripper
-    - lame #needed to asunder to rip to mp3
-    - autofs
-    - build-essential
-    - net-tools
-    - nmap
     - aptitude
-    - dkms
+    - asunder #music CD ripper
+    - autofs
+    - bombono-dvd #DVD creator
+    - build-essential
+    - chrome-gnome-shell
     #- compton #compositing manager for lightweight desktops like openbox, xfce, etc.
     - cscope
     - curl
-    - jq
+    - ddcutil # Query and change monitor settings
+    - dkms
     - exuberant-ctags
+    - flameshot
+    - gconf-editor
     - gimp
+    - gnome-tweak-tool
+    - jq
     #- keepassx
+    - lame #needed to asunder to rip to mp3
     - libc6:i386
+    - libnss3-tools #work with certificates - certutil
     - libreoffice
     - libstdc++6:i386
+    - libxml2-dev
     - mercurial
+    - mesa-utils #glxinfo, etc.
     - mplayer #mplayer2 is dead, maybe replace with mpv?
+    - net-tools
+    - nmap
     - ntp
     - openssh-client
     - openssh-server
-    - libnss3-tools #work with certificates - certutil
+    - p7zip-full
+    - pavucontrol #PulseAudio Volume Control
     - picard #rename/tag mp3 files based on online signatures
+    - pwgen
     - python-pip
     - rdesktop
     - redis-server
     - screen
     - silversearcher-ag #faster grep
     - software-properties-common
-    - gnome-tweak-tool
+    - solaar #manage Logitech wireless devices
     - ssvnc
     - tofrodos
     - traceroute
-    - whois
     - tree
     - unzip
-    - p7zip-full
+    - vlc
     - wget
-    - mesa-utils #glxinfo, etc.
+    - whois
     - x11vnc
     - xdotool
-    - xtightvncviewer
-    - bombono-dvd #DVD creator
-    - pavucontrol #PulseAudio Volume Control
-    - solaar #manage Logitech wireless devices
-    - chrome-gnome-shell
-    - gconf-editor
-    - pwgen
     - xmlsec1
-    - libxml2-dev
-    - vlc
-    - flameshot
+    - xtightvncviewer
     #also need https://git.lekensteyn.nl/ltunify/
     #also included at some point but no longer use
     #- clipit #view clipboard history
