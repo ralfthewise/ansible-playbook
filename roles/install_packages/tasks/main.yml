@@ -7,26 +7,27 @@
     - aptitude
     - asunder #music CD ripper
     - autofs
-    - bombono-dvd #DVD creator
+    #- bombono-dvd #DVD creator - no longer maintained, see `devede`
     - build-essential
     - chrome-gnome-shell
     #- compton #compositing manager for lightweight desktops like openbox, xfce, etc.
     - cscope
     - curl
     - ddcutil # Query and change monitor settings
+    - devede
     - dkms
     - exuberant-ctags
     - flameshot
-    - gconf-editor
+    #- gconf-editor #no longer available
     - gimp
     - gnome-tweak-tool
     - jq
     #- keepassx
     - lame #needed to asunder to rip to mp3
-    - libc6:i386
+    #- libc6:i386 #no longer available
     - libnss3-tools #work with certificates - certutil
     - libreoffice
-    - libstdc++6:i386
+    #- libstdc++6:i386 #no longer available
     - libxml2-dev
     - mercurial
     - mesa-utils #glxinfo, etc.
@@ -40,7 +41,7 @@
     - pavucontrol #PulseAudio Volume Control
     - picard #rename/tag mp3 files based on online signatures
     - pwgen
-    - python-pip
+    #- python-pip #already installed
     - rdesktop
     - redis-server
     - screen
@@ -64,10 +65,23 @@
     #- clipit #view clipboard history
     #- compiz-plugins-extra #original alt-tab application switcher
 
-- name: Install pip packages
+- stat: path=/usr/local/bin/aws
+  register: awscli
+
+- name: Install awscli
   become: True
-  pip: name={{item}} state=latest
-  with_items:
-    - awscli
-    - awslogs
-    - virtualenv
+  when: not awscli.stat.exists
+  shell: |
+    cd /tmp
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    ./aws/install
+    rm -rf aws awscliv2.zip
+
+#- name: Install pip packages
+#  become: True
+#  pip: name={{item}} state=latest
+#  with_items:
+#    - awscli
+#    - awslogs
+#    - virtualenv

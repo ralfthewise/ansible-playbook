@@ -1,4 +1,6 @@
 #!/bin/bash
+# Can be run like this:
+#   ./provision.sh --tags git,vim
 
 ROOT="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 pushd "${ROOT}" &> /dev/null

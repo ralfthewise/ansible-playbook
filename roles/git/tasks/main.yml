@@ -19,20 +19,20 @@
 - name: Make default pull ff
   shell: git config --global pull.ff yes
 
-- name: Make default conflict deff3
+- name: Make default conflict diff3
   shell: git config --global merge.conflictstyle diff3
 
-- name: Add git-lfs key
-  become: True
-  apt_key: url='https://packagecloud.io/github/git-lfs/gpgkey'
+#- name: Add git-lfs key
+#  become: True
+#  apt_key: url='https://packagecloud.io/github/git-lfs/gpgkey'
 
-- name: Add git-lfs repository
-  become: True
-  apt_repository: repo='deb https://packagecloud.io/github/git-lfs/ubuntu/ {{git_lfs_distribution_release}} main' state=present update_cache=yes
+#- name: Add git-lfs repository
+#  become: True
+#  apt_repository: repo='deb https://packagecloud.io/github/git-lfs/ubuntu/ {{git_lfs_distribution_release}} main' state=present update_cache=yes
 
-- name: Install git-lfs
-  become: True
-  apt: name=git-lfs state=latest
+#- name: Install git-lfs
+#  become: True
+#  apt: name=git-lfs state=latest
 
-- name: Install git-lfs filters
-  shell: git lfs install
+#- name: Install git-lfs filters
+#  shell: git lfs install
