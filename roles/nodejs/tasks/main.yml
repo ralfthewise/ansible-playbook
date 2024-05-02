@@ -2,36 +2,8 @@
 - stat: path=/usr/bin/node
   register: nodejs
 
-- name: remove ppa/chris-lea repository
-  become: True
-  apt_repository: repo="ppa:chris-lea/node.js" state=absent update_cache=yes
-
-- name: Add node repo
-  become: True
+- name: Install volta and node
   when: not nodejs.stat.exists
-  shell: curl -sL 'https://deb.nodesource.com/setup_{{nodejs_version}}' | sudo bash -
-
-- name: Install nodejs
-  become: True
-  apt: name=nodejs state=latest update_cache=yes cache_valid_time=86400
-
-- name: Yarn apt repository key
-  become: True
-  apt_key: url='https://dl.yarnpkg.com/debian/pubkey.gpg'
-
-- name: Add yarn repo
-  become: True
-  apt_repository: repo="deb https://dl.yarnpkg.com/debian/ stable main" state=present update_cache=yes
-
-- name: Install yarn
-  become: True
-  apt: name=yarn state=latest
-
-- name: Install global node packages
-  become: True
-  shell: npm install -g {{item}}
-  with_items:
-    - npm
-    - coffeescript #v2.X
-    - coffeelint
-    #- coffee-script #v1.X
+  shell: |
+    curl https://get.volta.sh | bash
+    bash -l -c 'volta install node'
