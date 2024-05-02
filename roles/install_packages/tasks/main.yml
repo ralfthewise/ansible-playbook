@@ -29,6 +29,7 @@
     - libreoffice
     #- libstdc++6:i386 #no longer available
     - libxml2-dev
+    - libyaml-dev #needed for ruby `psych` gem
     - mercurial
     - mesa-utils #glxinfo, etc.
     - mplayer #mplayer2 is dead, maybe replace with mpv?
