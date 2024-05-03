@@ -18,3 +18,11 @@
     regexp: '^# deb-src (.+) universe$'
     backrefs: True
     line: 'deb-src \1 universe'
+
+- name: Just enable via shell
+  become: True
+  shell: |
+    add-apt-repository -y restricted
+    add-apt-repository -y universe
+    sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
+    apt update

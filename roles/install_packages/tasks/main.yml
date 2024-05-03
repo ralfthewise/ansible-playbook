@@ -41,6 +41,7 @@
     - p7zip-full
     - pavucontrol #PulseAudio Volume Control
     - picard #rename/tag mp3 files based on online signatures
+    - pkgconf
     - pwgen
     #- python-pip #already installed
     - rdesktop

@@ -4,7 +4,7 @@
 
 - name: Install build dependencies
   become: True
-  shell: apt-get -y build-dep vim-gtk
+  shell: apt-get -y build-dep vim-gtk3
 
 - name: Create dev dir
   file: path=~/dev state=directory
@@ -16,7 +16,7 @@
 - name: Configure vim source
   when: not vim.stat.exists
   shell: |
-    RUBY_VERSION=`rbenv global`
+    RUBY_VERSION=`bash -l -c 'rbenv global'`
     PYTHON_CONFIG_DIR=`python3-config --configdir`
     CFLAGS=`python3-config --includes` LDFLAGS="-L/usr/local/rbenv/versions/$RUBY_VERSION/lib" ./configure --prefix=/usr/local/vim --enable-python3interp=yes --with-python3-config-dir=$PYTHON_CONFIG_DIR --enable-multibyte=yes --enable-cscope=yes --enable-rubyinterp=yes --with-ruby-command=/usr/local/rbenv/shims/ruby chdir=~/dev/vim
 
@@ -39,8 +39,8 @@
   when: not vim.stat.exists
   shell: ln -s /usr/local/vim/bin/vim /usr/local/bin/vi
 
-- name: Checkout vimconfig
-  git: repo=git@github.com:ralfthewise/vimconfig.git dest=~/dev/vimconfig force=no update=no
+# - name: Checkout vimconfig
+#   git: repo=git@github.com:ralfthewise/vimconfig.git dest=~/dev/vimconfig force=no update=no
 
-- name: Init vimconfig
-  shell: ~/dev/vimconfig/init.sh
+# - name: Init vimconfig
+#   shell: ~/dev/vimconfig/init.sh
