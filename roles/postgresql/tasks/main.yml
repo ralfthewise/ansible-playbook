@@ -1,15 +1,25 @@
 ---
-- name: Postgresql apt repository key
-  become: True
-  apt_key: url='https://www.postgresql.org/media/keys/ACCC4CF8.asc'
+- stat: path=/etc/apt/sources.list.d/pgdg.sources
+  register: pgdg_repo
 
-- name: Postgresql apt repository
+- name: Configure postgres apt repo
+  when: not pgdg_repo.stat.exists
   become: True
-  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ {{postgres_distribution_release}}-pgdg main' state=present update_cache=yes
+  shell: |
+    apt install -y postgresql-common
+    YES=1 /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+
+# - name: Postgresql apt repository key
+#   become: True
+#   apt_key: url='https://www.postgresql.org/media/keys/ACCC4CF8.asc'
+
+# - name: Postgresql apt repository
+#   become: True
+#   apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ {{postgres_distribution_release}}-pgdg main' state=present update_cache=yes
 
 - name: Install postgresql
   become: True
-  apt: name=postgresql-{{postgresql_version}} default_release={{postgres_distribution_release}}-pgdg state=latest update_cache=yes cache_valid_time=600
+  apt: name=postgresql-{{postgresql_version}} state=latest update_cache=yes cache_valid_time=600
 
 - name: Install libpq-dev
   become: True
@@ -18,3 +28,8 @@
 - name: Install check-postgres
   become: True
   apt: name=check-postgres state=latest update_cache=yes cache_valid_time=600
+
+- name: Add current user as postgres admin user
+  become: True
+  shell: |
+    sudo -i -u postgres createuser -d -l -r -s tim || true
