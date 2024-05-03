@@ -16,13 +16,13 @@
     # - {role: rvm, tags: ['rvm']}
     - {role: rbenv, tags: ['rbenv']}
     - {role: nodejs, tags: ['nodejs', 'node']}
-    - {role: google-cloud-sdk, tags: ['google-cloud-sdk']}
-    - {role: android, tags: ['android']}
+    # - {role: google-cloud-sdk, tags: ['google-cloud-sdk']}
+    # - {role: android, tags: ['android']}
     - {role: postgresql, tags: ['postgresql', 'postgres']}
     - {role: vim, tags: ['vim']}
-    - {role: docker, tags: ['docker']}
-    - {role: k8s, tags: ['k8s', 'kubernetes']}
-    - google_chrome
+    # - {role: docker, tags: ['docker']}
+    # - {role: k8s, tags: ['k8s', 'kubernetes']}
+    - {role: google_chrome, tags: ['chrome']}
     #- hipchat
     - {role: user_config, tags: ['user_config']}
     #- lilyterm
