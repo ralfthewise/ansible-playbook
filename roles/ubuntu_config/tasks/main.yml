@@ -22,6 +22,12 @@
 - shell: dconf write /org/gnome/shell/extensions/system-monitor/net-graph-width 50
 - shell: dconf write /org/gnome/shell/extensions/system-monitor/icon-display false
 
+# To dump everything, do:
+#   dconf dump / > dconf-new.txt
+# To just read a key do:
+#   dconf read /org/gnome/desktop/screensaver/lock-enabled
+# or
+#
 # Also could try things like this here:
 #   gsettings set org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize 6
 #   gsettings get org.compiz.core:/org/compiz/profiles/unity/plugins/core/ hsize
@@ -34,11 +40,14 @@
   register: profile
 
 - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/terminal '"<Super>t"'
+- shell: dconf write /org/gnome/desktop/screensaver/lock-enabled false
 
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/scrollback-unlimited true
-- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/login-shell true
+# - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/login-shell true
 - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/visible-name '"Default"'
-
+# This fixes things for vim - https://vi.stackexchange.com/questions/27399/whats-t-te-and-t-ti-added-by-vim-8
+- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/use-custom-command true
+- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/custom-command '"env TERM=gnome-256color /bin/bash -l"'
 
 
 #- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/calculator '""'

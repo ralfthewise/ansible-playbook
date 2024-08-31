@@ -25,6 +25,7 @@
     #- keepassx
     - lame #needed to asunder to rip to mp3
     #- libc6:i386 #no longer available
+    - libfuse2t64 #needed by AppImage
     - libnss3-tools #work with certificates - certutil
     - libreoffice
     #- libstdc++6:i386 #no longer available
@@ -46,6 +47,7 @@
     #- python-pip #already installed
     - rdesktop
     - redis-server
+    - ripgrep
     - screen
     - silversearcher-ag #faster grep
     - software-properties-common

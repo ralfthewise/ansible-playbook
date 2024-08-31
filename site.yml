@@ -28,20 +28,20 @@
     #- lilyterm
     - {role: ubuntu_config, tags: ['ubuntu_config']}
     - {role: virtualbox, tags: ['virtualbox']}
-    - {role: vagrant, tags: ['vagrant']}
-    - {role: packer, tags: ['packer']}
-    - {role: terraform, tags: ['terraform']}
+    #- {role: vagrant, tags: ['vagrant']}
+    #- {role: packer, tags: ['packer']}
+    #- {role: terraform, tags: ['terraform']}
     - mkusb #better usb startup disk creator: https://help.ubuntu.com/community/mkusb
-    - {role: caffeine, tags: ['caffeine']}
-    - {role: xbindkeys, tags: ['xbindkeys']}
+    #- {role: caffeine, tags: ['caffeine']}
+    #- {role: xbindkeys, tags: ['xbindkeys']}
     #- {role: indicator-multiload, tags: ['indicator-multiload']}
     #- {role: yubikey, tags: ['yubikey']}
     - {role: remmina, tags: ['remmina']}
-    - {role: seafile-client, tags: ['seafile-client']}
+    #- {role: seafile-client, tags: ['seafile-client']}
     - {role: generic_colorizer, tags: ['grc']}
     #- {role: autofs_client, tags: ['autofs_client']}
     - {role: reinstall_os, tags: ['reinstall_os']}
-    - {role: updf, tags: ['updf']}
+    #- {role: updf, tags: ['updf']}
 
 - name: Ping hosts
   hosts: ping

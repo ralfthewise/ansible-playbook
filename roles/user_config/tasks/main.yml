@@ -23,16 +23,16 @@
     regexp: 'export PROMPT_COMMAND=.*$'
     line: 'export PROMPT_COMMAND="history -a" #flush history after every command'
 
-- name: Create goenv function
-  lineinfile:
-    dest: ~/.bashrc
-    regexp: ^goenv.*
-    line: goenv() { TMPGOPATH="$(while [[ $PWD != "/" && ${PWD##*/} != "src" ]]; do cd ..; done && cd .. && pwd)"; GOPATH="$TMPGOPATH" PATH=$PATH:"$TMPGOPATH/bin" "$@"; }
+#- name: Create goenv function
+#  lineinfile:
+#    dest: ~/.bashrc
+#    regexp: ^goenv.*
+#    line: goenv() { TMPGOPATH="$(while [[ $PWD != "/" && ${PWD##*/} != "src" ]]; do cd ..; done && cd .. && pwd)"; GOPATH="$TMPGOPATH" PATH=$PATH:"$TMPGOPATH/bin" "$@"; }
 
-- name: Create goenv completion
-  lineinfile:
-    dest: ~/.bashrc
-    line: complete -F _command goenv
+#- name: Create goenv completion
+#  lineinfile:
+#    dest: ~/.bashrc
+#    line: complete -F _command goenv
 
 # Not sure this is actually necessary
 - name: Export HISTFILESIZE HISTSIZE HISTTIMEFORMAT
@@ -41,11 +41,11 @@
 - name: Create screen config
   copy: src=roles/user_config/files/screenrc dest=~/.screenrc mode=0600
 
-- name: Add git doglog
-  shell: git config --global alias.doglog "log --graph --pretty=format:'%h -%C(yellow)%d%Creset %C(bold white)%s%Creset %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=iso"
+#- name: Add git doglog
+#  shell: git config --global alias.doglog "log --graph --pretty=format:'%h -%C(yellow)%d%Creset %C(bold white)%s%Creset %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=iso"
 
-- name: Add git pr
-  shell: git config --global alias.pr '!xdg-open "$(git remote -v | grep origin | grep push | cut -f 2 | cut -d " " -f 1 | sed -e "s|git@\(.*\):\(.*\).git|https://\1/\2|")/pull/new/$(git rev-parse --abbrev-ref HEAD)"'
+#- name: Add git pr
+#  shell: git config --global alias.pr '!xdg-open "$(git remote -v | grep origin | grep push | cut -f 2 | cut -d " " -f 1 | sed -e "s|git@\(.*\):\(.*\).git|https://\1/\2|")/pull/new/$(git rev-parse --abbrev-ref HEAD)"'
 
 - name: Set show dirty state
   lineinfile:
