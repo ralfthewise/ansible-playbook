@@ -1,4 +1,20 @@
 ---
+# Here are some helpful commands for manipulating the
+# configuration/schema/database/whatever that gnome uses to maintain these
+# settings. This (https://askubuntu.com/a/249924) suggests that `gsettings` is
+# preferred, but the dump/watch parts of dconf make it easier to use most of
+# the time.
+#
+#   dconf dump > /tmp/dconf.dump
+#   dconf watch /
+#   gsettings monitor org.gnome.settings-daemon.plugins.media-keys
+#
+#   dconf write /org/gnome/settings-daemon/plugins/media-keys/terminal "['<Super>t']"
+#   gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t']"
+#
+#   dconf reset /org/gnome/settings-daemon/plugins/media-keys/terminal
+#   gsettings reset org.gnome.settings-daemon.plugins.media-keys terminal
+
 - script: "{{role_path}}/files/install_gnome_extension.sh {{item}}"
   with_items:
     - alternate-tab@gnome-shell-extensions.gcampax.github.com
@@ -36,7 +52,7 @@
 
 - name: Lookup gnome terminal default profile
   shell: gsettings get org.gnome.Terminal.ProfilesList default
-  #shell: dconf read /org/gnome/terminal/legacy/profiles:/default
+  #shell: dconf list /org/gnome/terminal/legacy/profiles:/
   register: profile
 
 - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/terminal '"<Super>t"'
@@ -55,6 +71,9 @@
 
 - shell: dconf write /org/gnome/shell/overrides/workspaces-only-on-primary false
 - shell: dconf write /org/gnome/mutter/workspaces-only-on-primary false
+- shell: dconf write /org/gnome/shell/app-switcher/current-workspace-only true
+- shell: dconf write /org/gnome/shell/extensions/dash-to-dock/isolate-workspaces true
+- shell: dconf write /org/gnome/shell/extensions/tiling-assistant/tiling-popup-all-workspace false
 
 - shell: dconf write /org/gnome/desktop/wm/keybindings/toggle-maximized '["<Alt>F10"]'
 - shell: dconf write /org/gnome/desktop/wm/keybindings/maximize '[""]' #defaults to <Super>Up
@@ -79,6 +98,7 @@
 
 # custom ubuntu gnome configs
 - shell: dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed false
+- shell: dconf write /org/gnome/shell/extensions/ding/show-home false
 - shell: dconf write /org/gnome/desktop/interface/clock-show-date true
 - shell: dconf write /org/gnome/desktop/interface/show-battery-percentage true
 
@@ -114,10 +134,6 @@
 ##- shell: dconf write /org/compiz/profiles/unity/plugins/scale/initiate-key '"<Super>w"'
 #- shell: dconf reset /org/compiz/profiles/unity/plugins/expo/expo-key
 ##- shell: dconf write /org/compiz/profiles/unity/plugins/expo/expo-key '"<Super>s"'
-
-
-
-
 
 
 #- shell: gnome-shell --replace &>/dev/null & #restart gnome shell
