@@ -2,18 +2,12 @@
 - stat: path=/usr/bin/google-chrome
   register: chrome
 
-- name: Add google signing key and repo
+- name: Install google chrome
   when: not chrome.stat.exists
   become: True
   shell: |
-    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub > /tmp/linux_signing_key.pub
-    install -D -o root -g root -m 644 /tmp/linux_signing_key.pub /etc/apt/keyrings/linux_signing_key.pub
-    bash -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/linux_signing_key.pub] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list'
-
-- name: Apt update
-  become: True
-  when: not chrome.stat.exists
-  apt: update_cache=yes
+    wget -q -O - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb > /tmp/google-chrome.deb
+    apt install -y /tmp/google-chrome.deb
 
 - name: Install chrome
   become: True

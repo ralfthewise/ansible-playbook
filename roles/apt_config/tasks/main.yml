@@ -1,23 +1,23 @@
 ---
-- name: Enable restricted source packages
-  become: True
-  notify:
-    - Update apt cache
-  lineinfile:
-    dest: /etc/apt/sources.list
-    regexp: '^# deb-src (.+) main restricted$'
-    backrefs: True
-    line: 'deb-src \1 main restricted'
+# - name: Enable restricted source packages
+#   become: True
+#   notify:
+#     - Update apt cache
+#   lineinfile:
+#     dest: /etc/apt/sources.list
+#     regexp: '^# deb-src (.+) main restricted$'
+#     backrefs: True
+#     line: 'deb-src \1 main restricted'
 
-- name: Enable universe source packages
-  become: True
-  notify:
-    - Update apt cache
-  lineinfile:
-    dest: /etc/apt/sources.list
-    regexp: '^# deb-src (.+) universe$'
-    backrefs: True
-    line: 'deb-src \1 universe'
+# - name: Enable universe source packages
+#   become: True
+#   notify:
+#     - Update apt cache
+#   lineinfile:
+#     dest: /etc/apt/sources.list
+#     regexp: '^# deb-src (.+) universe$'
+#     backrefs: True
+#     line: 'deb-src \1 universe'
 
 - name: Just enable via shell
   become: True
