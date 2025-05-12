@@ -17,6 +17,10 @@
   become: True
   copy: src=roles/rbenv/files/rbenv.sh dest=/etc/profile.d/rbenv.sh group=root owner=root mode=0644
 
+- name: Upgrade ruby-build to pull down new ruby builds
+  become: True
+  shell: git -C "$(rbenv root)"/plugins/ruby-build pull
+
 - name: Install ruby
   become: True
   shell: bash -l -c 'rbenv versions --bare | grep -q {{ruby_version}} || rbenv install {{ruby_version}}'
