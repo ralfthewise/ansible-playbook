@@ -18,4 +18,5 @@ export ANSIBLE_HOST ANSIBLE_GROUPS
 ansible-playbook site.yml -vv -i hosts.yml --ask-become-pass "$@"
 
 echo "The following startup applications will be launched upon next login: caffeine-indicator, xbindkeys"
+echo "Install the system monitor (doing the manual installation) from https://github.com/mgalgs/gnome-shell-system-monitor-next-applet"
 popd &> /dev/null

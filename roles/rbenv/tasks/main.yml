@@ -19,7 +19,7 @@
 
 - name: Upgrade ruby-build to pull down new ruby builds
   become: True
-  shell: git -C "$(rbenv root)"/plugins/ruby-build pull
+  shell: git -C "$(bash -l -c 'rbenv root')"/plugins/ruby-build pull
 
 - name: Install ruby
   become: True
@@ -28,6 +28,10 @@
 - name: Set global default ruby version
   become: True
   shell: bash -l -c 'rbenv global {{ruby_version}}'
+
+- name: Install updated gem
+  become: True
+  shell: bash -l -c 'gem update --system'
 
 - name: Install updated bundler
   become: True
