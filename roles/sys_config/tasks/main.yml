@@ -1,0 +1,6 @@
+---
+- name: Switch from wayland to X11
+  become: True
+  shell: |
+    sed -i 's/^#WaylandEnable=false$/WaylandEnable=false/' /etc/gdm3/custom.conf
+    systemctl restart gdm3
