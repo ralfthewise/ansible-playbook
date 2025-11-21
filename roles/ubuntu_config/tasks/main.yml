@@ -26,17 +26,17 @@
   apt: name={{item}} state=latest
   with_items:
     - gir1.2-gtop-2.0
-    - gir1.2-networkmanager-1.0
+    - gir1.2-nm-1.0
     - gir1.2-clutter-1.0
+    - gnome-system-monitor
 
-- shell: gsettings set org.gnome.shell enabled-extensions "['ubuntu-appindicators@ubuntu.com', 'ubuntu-dock@ubuntu.com', 'alternate-tab@gnome-shell-extensions.gcampax.github.com', 'system-monitor@paradoxxx.zero.gmail.com']"
-#- shell: gsettings set org.gnome.shell enabled-extensions "['ubuntu-appindicators@ubuntu.com', 'ubuntu-dock@ubuntu.com', 'alternate-tab@gnome-shell-extensions.gcampax.github.com', 'system-monitor@paradoxxx.zero.gmail.com', 'TopIcons@phocean.net']"
+# - shell: gsettings set org.gnome.shell enabled-extensions "['ubuntu-appindicators@ubuntu.com', 'ubuntu-dock@ubuntu.com', 'alternate-tab@gnome-shell-extensions.gcampax.github.com', 'system-monitor@paradoxxx.zero.gmail.com']"
 
-  # system monitor config
-- shell: dconf write /org/gnome/shell/extensions/system-monitor/cpu-graph-width 50
-- shell: dconf write /org/gnome/shell/extensions/system-monitor/memory-graph-width 50
-- shell: dconf write /org/gnome/shell/extensions/system-monitor/net-graph-width 50
-- shell: dconf write /org/gnome/shell/extensions/system-monitor/icon-display false
+# System monitor config
+- shell: dconf write /org/gnome/shell/extensions/system-monitor-next-applet/compact-display true
+- shell: dconf write /org/gnome/shell/extensions/system-monitor-next-applet/cpu-show-text false
+- shell: dconf write /org/gnome/shell/extensions/system-monitor-next-applet/memory-show-text false
+- shell: dconf write /org/gnome/shell/extensions/system-monitor-next-applet/net-show-text false
 
 # To dump everything, do:
 #   dconf dump / > dconf-new.txt
