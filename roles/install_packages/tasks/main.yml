@@ -64,6 +64,7 @@
     - xdotool
     - xmlsec1
     - xtightvncviewer
+    - zbar-tools # Read MFA QR codes from CLI: `zbarimg AWS_MFA.png`
     #also need https://git.lekensteyn.nl/ltunify/
     #also included at some point but no longer use
     #- clipit #view clipboard history
