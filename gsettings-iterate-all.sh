@@ -11,3 +11,6 @@ do
     echo "$schema :: $key :: $value"
   done
 done
+
+# Can also be helpful:
+# dconf dump /
