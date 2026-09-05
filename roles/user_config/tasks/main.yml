@@ -38,6 +38,12 @@
 - name: Export HISTFILESIZE HISTSIZE HISTTIMEFORMAT
   lineinfile: dest=~/.bashrc line='export HISTFILESIZE HISTSIZE HISTTIMEFORMAT'
 
+- name: Add ~/.local/bin to PATH
+  lineinfile:
+    dest: ~/.bashrc
+    regexp: '^export PATH="\$PATH:\$HOME/\.local/bin"$'
+    line: 'export PATH="$PATH:$HOME/.local/bin"'
+
 - name: Create screen config
   copy: src=roles/user_config/files/screenrc dest=~/.screenrc mode=0600
 
