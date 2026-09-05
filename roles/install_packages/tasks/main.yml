@@ -10,6 +10,7 @@
     #- bombono-dvd #DVD creator - no longer maintained, see `devede`
     - build-essential
     - chrome-gnome-shell
+    - chrony
     #- compton #compositing manager for lightweight desktops like openbox, xfce, etc.
     - cscope
     - curl
@@ -36,7 +37,6 @@
     - mplayer #mplayer2 is dead, maybe replace with mpv?
     - net-tools
     - nmap
-    - ntp
     - openssh-client
     - openssh-server
     - p7zip-full

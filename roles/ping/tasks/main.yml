@@ -1,6 +1,6 @@
 ---
-- include: linux.yml
+- import_tasks: linux.yml
   when: ansible_os_family == "Debian"
 
-- include: windows.yml
+- import_tasks: windows.yml
   when: ansible_os_family == "Windows"

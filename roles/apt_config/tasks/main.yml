@@ -19,10 +19,17 @@
 #     backrefs: True
 #     line: 'deb-src \1 universe'
 
-- name: Just enable via shell
+- name: Enable source, restricted and universe repositories
+  ansible.builtin.deb822_repository:
+    name: ubuntu-official-sources
+    types: [deb, deb-src]
+    uris: http://archive.ubuntu.com/ubuntu
+    suites: "{{ ansible_facts['distribution_release'] }}"
+    components: [main, restricted, universe, multiverse]
+    state: present
   become: True
-  shell: |
-    add-apt-repository -y restricted
-    add-apt-repository -y universe
-    sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources
-    apt update
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+  become: True
