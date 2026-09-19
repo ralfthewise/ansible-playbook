@@ -14,36 +14,8 @@
 #
 #   dconf reset /org/gnome/settings-daemon/plugins/media-keys/terminal
 #   gsettings reset org.gnome.settings-daemon.plugins.media-keys terminal
-
-- script: "{{role_path}}/files/install_gnome_extension.sh {{item}}"
-  with_items:
-    - alternate-tab@gnome-shell-extensions.gcampax.github.com
-    - system-monitor@paradoxxx.zero.gmail.com
-    #- TopIcons@phocean.net
-
-- name: Install system monitor dependencies
-  become: True
-  apt: name={{item}} state=latest
-  with_items:
-    - gir1.2-gtop-2.0
-    - gir1.2-nm-1.0
-    - gir1.2-clutter-1.0
-    - gnome-system-monitor
-
-# - shell: gsettings set org.gnome.shell enabled-extensions "['ubuntu-appindicators@ubuntu.com', 'ubuntu-dock@ubuntu.com', 'alternate-tab@gnome-shell-extensions.gcampax.github.com', 'system-monitor@paradoxxx.zero.gmail.com']"
-
-# Configure mouse scrolling
-- shell: dconf write /org/gnome/desktop/peripherals/mouse/natural-scroll true
-- shell: dconf write /org/gnome/desktop/peripherals/touchpad/natural-scroll true
-- shell: dconf write /org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled true
-
-# System monitor config
-- shell: dconf write /org/gnome/shell/extensions/system-monitor-next-applet/compact-display true
-- shell: dconf write /org/gnome/shell/extensions/system-monitor-next-applet/icon-display false
-- shell: dconf write /org/gnome/shell/extensions/system-monitor-next-applet/cpu-show-text false
-- shell: dconf write /org/gnome/shell/extensions/system-monitor-next-applet/memory-show-text false
-- shell: dconf write /org/gnome/shell/extensions/system-monitor-next-applet/net-show-text false
-
+#
+#
 # To dump everything, do:
 #   dconf dump / > dconf-new.txt
 # To just read a key do:
@@ -56,90 +28,79 @@
 #   gsettings list-keys org.compiz.wall:/
 #   gsettings get org.gnome.Terminal.ProfilesList default
 
-- name: Lookup gnome terminal default profile
-  shell: gsettings get org.gnome.Terminal.ProfilesList default
-  #shell: dconf list /org/gnome/terminal/legacy/profiles:/
-  register: profile
+# Configure mouse scrolling
+- shell: gsettings set org.gnome.desktop.peripherals.mouse natural-scroll false
+- shell: gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll false
+- shell: gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
+- shell: gsettings set org.gnome.desktop.peripherals.touchpad click-method 'fingers'
 
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/terminal '"<Super>t"'
-- shell: dconf write /org/gnome/desktop/screensaver/lock-enabled false
+# Configure power settings
+- shell: gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
+- shell: gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
 
-- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/scrollback-unlimited true
-# - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/login-shell true
-- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/visible-name '"Default"'
-# This fixes things for vim - https://vi.stackexchange.com/questions/27399/whats-t-te-and-t-ti-added-by-vim-8
-- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/use-custom-command true
-- shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/custom-command '"env TERM=gnome-256color /bin/bash -l"'
+# Configure gnome Terminal
+- shell: gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
 
+# Configure Ptyxis (gnome terminal)
+- shell: gsettings set org.gnome.Ptyxis restore-session false
 
-#- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/calculator '""'
-#- shell: dconf write /org/gnome/terminal/legacy/keybindings/help '"disabled"'
+- name: Lookup Ptyxis default profile
+  shell: gsettings get org.gnome.Ptyxis default-profile-uuid | tr -d "'"
+  register: ptyxis_profile
 
-- shell: dconf write /org/gnome/shell/overrides/workspaces-only-on-primary false
-- shell: dconf write /org/gnome/mutter/workspaces-only-on-primary false
-- shell: dconf write /org/gnome/shell/app-switcher/current-workspace-only true
-- shell: dconf write /org/gnome/shell/extensions/dash-to-dock/isolate-workspaces true
-- shell: dconf write /org/gnome/shell/extensions/tiling-assistant/tiling-popup-all-workspace false
+- shell: dconf write "/org/gnome/Ptyxis/Profiles/{{ ptyxis_profile.stdout }}/limit-scrollback" false
+- shell: dconf write "/org/gnome/Ptyxis/Profiles/{{ ptyxis_profile.stdout }}/login-shell" true
 
-- shell: dconf write /org/gnome/desktop/wm/keybindings/toggle-maximized '["<Alt>F10"]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/maximize '[""]' #defaults to <Super>Up
-- shell: dconf write /org/gnome/desktop/wm/keybindings/unmaximize '[""]' #defaults to <Super>Down
-- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-left '[""]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-right '[""]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-up '["<Super>Up"]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-down '["<Super>Down"]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-left '[""]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-right '[""]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-up '["<Shift><Super>Up"]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-down '["<Shift><Super>Down"]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-monitor-left '["<Shift><Super>Left"]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-monitor-right '["<Shift><Super>Right"]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-monitor-up '[""]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-monitor-down '[""]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-1 '[""]'
-- shell: dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-1 '[""]'
+# Configure workspaces/dock
+- shell: gsettings set org.gnome.mutter workspaces-only-on-primary false
+- shell: gsettings set org.gnome.shell.app-switcher current-workspace-only true
+- shell: gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
+- shell: gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
+- shell: gsettings set org.gnome.shell.extensions.tiling-assistant tiling-popup-all-workspace false
 
-- shell: dconf write /org/gtk/settings/file-chooser/show-hidden true
-- shell: dconf write /org/gnome/nautilus/preferences/default-folder-viewer '"list-view"'
+# Configure file chooser / nautilus
+- shell: gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
+- shell: gsettings set org.gtk.gtk4.Settings.FileChooser show-hidden true
 
-# custom ubuntu gnome configs
-- shell: dconf write /org/gnome/shell/extensions/dash-to-dock/dock-fixed false
-- shell: dconf write /org/gnome/shell/extensions/ding/show-home false
-- shell: dconf write /org/gnome/desktop/interface/clock-show-date true
-- shell: dconf write /org/gnome/desktop/interface/show-battery-percentage true
+# - name: Lookup gnome terminal default profile
+#   shell: gsettings get org.gnome.Terminal.ProfilesList default
+#   #shell: dconf list /org/gnome/terminal/legacy/profiles:/
+#   register: profile
 
-# custom print scr
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings '["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/", "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"]'
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/screenshot "''"
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name '"Screenshot Dialog"'
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command '"flameshot gui"'
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding '"Print"'
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/screenshot-clip "''"
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name '"Screenshot Full"'
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command '"flameshot full -c -p /tmp"'
-- shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding '"<Control>Print"'
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/terminal '"<Super>t"'
+# - shell: dconf write /org/gnome/desktop/screensaver/lock-enabled false
 
-# unity configs
-#- shell: dconf write /com/canonical/indicator/power/show-percentage true
-#- shell: dconf write /desktop/unity/lenses/applications/display-available-apps false #don't show online results in dash
-#- shell: dconf write /desktop/unity/lenses/files/use-locate false #don't show file results
-#- shell: dconf write /com/canonical/unity/lenses/remote-content-search '"none"'
-#- shell: dconf write /com/canonical/unity/launcher/favorites "$(dconf read /com/canonical/unity/launcher/favorites | ruby -e 'items = eval(STDIN.read); items.delete("application://ubuntu-amazon-default.desktop"); p items')" #don't show icon for amazon
+# - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/scrollback-unlimited true
+# # - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/login-shell true
+# - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/visible-name '"Default"'
+# # This fixes things for vim - https://vi.stackexchange.com/questions/27399/whats-t-te-and-t-ti-added-by-vim-8
+# - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/use-custom-command true
+# - shell: dconf write /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout }}/custom-command '"env TERM=gnome-256color /bin/bash -l"'
 
-#- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '"<Super>space"'
-#- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/execute-command '"<Super>r"'
-#- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/panel-first-menu '"Disabled"' #don't show application first menu on Alt-F10
-#- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/reveal-trigger 0
-#- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/reveal-pressure 1
-#- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1 #hide launcher unless mouse over it
-#- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-capture-mouse false #no sticky edges for multi-monitor?
-#- shell: dconf write /org/compiz/profiles/unity/plugins/core/hsize 4
-#- shell: dconf write /org/compiz/profiles/unity/plugins/core/vsize 1
-#- shell: dconf write /org/compiz/profiles/unity/plugins/wall/allow-wraparound true
-#- shell: dconf reset /org/compiz/profiles/unity/plugins/scale/initiate-key
-##- shell: dconf write /org/compiz/profiles/unity/plugins/scale/initiate-key '"<Super>w"'
-#- shell: dconf reset /org/compiz/profiles/unity/plugins/expo/expo-key
-##- shell: dconf write /org/compiz/profiles/unity/plugins/expo/expo-key '"<Super>s"'
+# # custom print scr
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings '["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/", "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"]'
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/screenshot "''"
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name '"Screenshot Dialog"'
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command '"flameshot gui"'
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding '"Print"'
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/screenshot-clip "''"
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/name '"Screenshot Full"'
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/command '"flameshot full -c -p /tmp"'
+# - shell: dconf write /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/binding '"<Control>Print"'
 
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/show-launcher '"<Super>space"'
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/execute-command '"<Super>r"'
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/panel-first-menu '"Disabled"' #don't show application first menu on Alt-F10
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/reveal-trigger 0
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/reveal-pressure 1
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-hide-mode 1 #hide launcher unless mouse over it
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/unityshell/launcher-capture-mouse false #no sticky edges for multi-monitor?
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/core/hsize 4
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/core/vsize 1
+# #- shell: dconf write /org/compiz/profiles/unity/plugins/wall/allow-wraparound true
+# #- shell: dconf reset /org/compiz/profiles/unity/plugins/scale/initiate-key
+# ##- shell: dconf write /org/compiz/profiles/unity/plugins/scale/initiate-key '"<Super>w"'
+# #- shell: dconf reset /org/compiz/profiles/unity/plugins/expo/expo-key
+# ##- shell: dconf write /org/compiz/profiles/unity/plugins/expo/expo-key '"<Super>s"'
 
-#- shell: gnome-shell --replace &>/dev/null & #restart gnome shell
+# #- shell: gnome-shell --replace &>/dev/null & #restart gnome shell
