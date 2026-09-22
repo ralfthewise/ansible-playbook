@@ -26,6 +26,7 @@
     uris: http://archive.ubuntu.com/ubuntu
     suites: "{{ ansible_facts['distribution_release'] }}"
     components: [main, restricted, universe, multiverse]
+    signed_by: /usr/share/keyrings/ubuntu-archive-keyring.gpg
     state: present
   become: True
 
