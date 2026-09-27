@@ -5,10 +5,12 @@
 
 - name: Include adams config
   become: True
-  lineinfile:
-    dest: /etc/auto.master
-    regexp: '/etc/auto.adams$'
-    line: '/- /etc/auto.adams'
+  copy:
+    dest: /etc/auto.master.d/adams.autofs
+    content: "/- /etc/auto.adams\n"
+    owner: root
+    group: root
+    mode: "0644"
   notify:
     - Restart autofs
 
