@@ -47,6 +47,8 @@
     #- python-pip #already installed
     - rdesktop
     - redis-server
+    - remmina
+    - remmina-plugin-rdp
     - ripgrep
     - screen
     - silversearcher-ag #faster grep
